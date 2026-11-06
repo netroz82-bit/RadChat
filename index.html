@@ -227,7 +227,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 #dpw{position:relative;margin:12px 0 0}#dpw input{width:100%;padding:13px 46px 13px 14px;border-radius:14px;border:1.5px solid #cfd8e3;background:#f5f8fb;font:inherit;font-size:22px;letter-spacing:7px;text-align:center;direction:ltr;outline:0;transition:border-color .2s}#dpw input::placeholder{letter-spacing:0;font-size:15px}#dpw input:focus{border-color:#2a55d4;background:#fff}
 #dpw .ey{position:absolute;top:22px;left:12px;transform:translateY(-50%);font-size:20px;cursor:pointer;opacity:.7}#dpr{color:#d33;font-size:13px;min-height:22px;margin:6px 0 0}
 .dk #dpw input{background:#162027;color:#e8edf0;border-color:#33434d}.dk #dpw input:focus{border-color:#4a8cff;background:#10181d}
-#bkb{margin:14px 18px 0;padding:12px 14px;border-radius:14px;background:#fff3cd;color:#664d03;font-size:13px;line-height:1.9;text-align:right}#bkb p{margin:4px 0 0}
+
 </style><style>
 #in{min-height:48px;max-height:160px;padding:13px 16px;font-size:17px;line-height:1.5}
 .in{gap:2px;padding-left:4px;padding-right:4px}
@@ -240,6 +240,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 #sdl{background:#e5484d!important;color:#fff!important;border-radius:50%}
 #v{background:#000;z-index:30}#v img,#vv{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain}
 #v.fs #vi{width:auto!important;height:auto!important;object-fit:none}
+#vd{position:fixed;top:calc(10px + env(safe-area-inset-top));left:12px;width:40px;height:40px;border:0;border-radius:50%;background:#0009;color:#fff;font-size:20px;z-index:31}#v.fs #vd{display:none}
 #vx{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;width:40px;height:40px;border:0;border-radius:50%;background:#0009;color:#fff;font-size:20px;z-index:31}
 #mn{min-width:150px}#mn button{padding:9px 14px}
 </style><style>
@@ -352,7 +353,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
   
   <div id="rg1" class="rgc"><div class="rr"><div class="fl f1"><label>شماره موبایل بدون صفر</label><input id="ph" type="tel" inputmode="numeric" maxlength="12" placeholder="شماره موبایل بدون صفر" autocomplete="off" oninput="pdg(this)"></div><div class="fl fc"><label>انتخاب کشور</label><select id="cc"></select></div></div>
 <div class="fl"><label>ثبت رمز شخصی (از ۴ تا ۸ رقم)</label><div class="rr"><div class="pw f1"><input id="pw" type="password" inputmode="numeric" maxlength="8" placeholder="رمز شخصی" autocomplete="off" oninput="pdg(this)"><span class="ey" onclick="eye('pw')">👁</span></div><button id="rg1b" onclick="rg1()">تأیید</button></div></div></div>
-<div id="rg2" class="rgc"><img id="rgi" style="display:none;width:84px;height:84px;border-radius:50%;object-fit:cover"><input id="rn" maxlength="20" placeholder="نام شما (الزامی)"><button onclick="fpick('rgp')">عکس پروفایل (اختیاری)</button><input type="file" id="rgp" accept="image/*" hidden><button onclick="rg2()">ورود به رادچت</button></div><p id="lgm"></p><div id="bkb" style="display:none"><b>ورود با رمز پشتیبان</b><p>اگر نمی‌توانید وارد حساب شوید (مثلاً رمز شخصی را فراموش کرده‌اید یا حساب روی دستگاه دیگری فعال است و ورود تأیید نمی‌شود)، با سازندهٔ برنامه تماس بگیرید تا یک رمز پشتیبان ۸ رقمی به شما بدهد. آن را در همان فیلد «رمز شخصی» بالا وارد کنید و تأیید را بزنید.</p><p>هر رمز پشتیبان فقط یک‌بار قابل استفاده است و پس از ورود موفق برای همیشه باطل می‌شود. اگر بیش از ۳ بار اشتباه وارد کنید، برنامه ۲۴ ساعت قفل می‌شود.</p></div>
+<div id="rg2" class="rgc"><img id="rgi" style="display:none;width:84px;height:84px;border-radius:50%;object-fit:cover"><input id="rn" maxlength="20" placeholder="نام شما (الزامی)"><button onclick="fpick('rgp')">عکس پروفایل (اختیاری)</button><input type="file" id="rgp" accept="image/*" hidden><button onclick="rg2()">ورود به رادچت</button></div><p id="lgm"></p><button id="rgsk" style="display:none;margin:10px auto" onclick="nwSkip()">ورود بدون انتظار (بدون انتقال چت‌ها)</button>
 </div>
 <div class="s" id="ls">
   <header><button id="hpf" onclick="openSet(1)" aria-label="پروفایل"></button><h1>رادچت<small id="st">در حال اتصال…</small></h1><button id="bel" onclick="ntOpen()" aria-label="اعلان‌ها">🔔<i id="nbd"></i></button><button onclick="openDr()">👥</button><button onclick="openSet()">⚙</button></header>
@@ -389,7 +390,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
       <label class="rw"><span>زنگ تماس</span><input type="checkbox" id="srt" onchange="L.rt=this.checked?'1':'0';this.checked&&ringOnce()"></label>
       <label class="rw"><span>چت ذخیره (پیام‌ها و فایل‌های شخصی)</span><input type="checkbox" id="svc" onchange="tsv(this.checked)"></label>
     </div></details>
-    <details class="ac"><summary class="rw">استیکرها</summary><div class="ab">
+    <details class="ac" id="skd"><summary class="rw">استیکرها</summary><div class="ab">
       <div id="skl" style="width:100%;max-width:320px"></div>
       <button id="skr" onclick="skRestore()" style="display:none">بازگرداندن بسته‌های حذف‌شده</button>
       <h3>افزودن بستهٔ استیکر تلگرام</h3>
@@ -432,14 +433,19 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 <input type="file" id="fbg" accept="image/*" hidden>
 <div id="mn"></div>
 <div id="cv"><video id="rv" autoplay playsinline></video><video id="lv" autoplay playsinline muted></video><div id="cn"><b id="cnm"></b><span id="cst"></span></div><div id="cb"><button id="mt" onclick="mute()">🎙</button><button id="cf" onclick="flip()"></button><button id="sk" onclick="spk(!CA.sp)">🔈</button><button id="en" onclick="endCall(1)">📵</button></div></div>
-<div id="v" onclick="history.back()"><img id="vi" onclick="event.stopPropagation();$('#v').classList.toggle('fs')"><video id="vv" controls playsinline onclick="event.stopPropagation()" style="display:none;max-width:100%;max-height:100%"></video><button id="vx" onclick="event.stopPropagation();history.back()">✕</button></div>
+<div id="v" onclick="history.back()"><img id="vi" onclick="event.stopPropagation();$('#v').classList.toggle('fs')"><video id="vv" controls playsinline onclick="event.stopPropagation()" style="display:none;max-width:100%;max-height:100%"></video><button id="vx" onclick="event.stopPropagation();history.back()">✕</button><button id="vd" onclick="event.stopPropagation();vSave()" aria-label="ذخیره">⬇</button></div>
 <div id="md"><div><img id="dpi" alt=""><h3 id="dt"></h3><p id="db"></p><div id="dpw" style="display:none"><input id="dpv" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="رمز شخصی"><span id="dpe" class="ey">👁</span><p id="dpr"></p></div><label id="dl"><input type="checkbox" id="dc"> <span id="dls"></span></label><button id="dy"></button><button id="dn"></button></div></div>
 <script>
 const $=s=>document.querySelector(s),L=localStorage,N=window.Notification;
 const E=new TextEncoder(),EC={name:'ECDH',namedCurve:'P-256'},AG={name:'AES-GCM',length:256};
 const _d=s=>atob([...s].reverse().join('')),BR=['0RXct9CN4ADO68WaugXctVmLyV2avJnYv8iOzN3d','0RXct9CN4gDO602bj5SctVmdphmLyV2avJnYv8iOzN3d'].map(_d),T=u=>'rc1/'+u.slice(0,40),P=c=>'rc1/p/'+c,ID=/^[\w-]{86}$/;
 const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
-const APPV='4.2.0';
+/* ===== دستور نسخه‌گذاری (در هر آپدیت برنامه رعایت شود) =====
+   APPV باید در هر آپدیت برابر تاریخ و ساعت میلادیِ همان آپدیت شود، با این قالب:
+   سالِ میلادی (فقط دو رقم آخر).ماه بدون صفرِ ابتدایی.روز بدون صفرِ ابتدایی.ساعت بدون صفرِ ابتدایی.دقیقه بدون صفرِ ابتدایی
+   مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
+   این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود. */
+const APPV='26.11.5.13.2';
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -492,7 +498,7 @@ function conn(){
 }
 const pub=(t,o)=>{const s=JSON.stringify(o);CL.forEach(c=>c.connected&&c.publish(t,s,{qos:1}))};
 const ibClr=t=>{try{if(typeof t!='string'||t.length>120||!t.startsWith('rc1/ib/'+me.id.slice(0,40)+'/'))return;CL.forEach(c=>c.connected&&c.publish(t,'',{qos:1,retain:true}))}catch{}};
-const SFT=['dv','rd','del','clr','rq','acc','rj'];
+const SFT=['dv','rd','del','clr','rq','acc','rj','nwa'];
 function post(to,o,id){
   return enc(to,JSON.stringify(o)).then(e=>{
     const pl=JSON.stringify({f:me.id,id,...e}),rt=to!=me.id&&o&&(!o.t||SFT.includes(o.t)||(o.t=='ck'&&o.cn<=14))&&typeof id=='string'&&/^[\w-]{4,40}$/.test(id)?'rc1/ib/'+to.slice(0,40)+'/'+id:'';
@@ -539,7 +545,7 @@ async function on(d){
   SEEN.add(d.id);
   let p;try{p=JSON.parse(await dec(d.f,d.iv,d.ct))}catch{return}
   if(p&&d.rt&&p.t=='ck'){p.$rt=d.rt;d.keep=1}
-  if(p&&p.t=='adm')return admIn(d.f,p);if(p&&(p.t=='acc'||p.t=='rj'||p.t=='acd'||p.t=='wipe')&&mgIn(d.f,p))return;if(p&&d.f!=me.id)delete p.sy;if(p&&d.f==me.id){if((p.sy==1||p.sy==2)&&C[p.c]&&(p.t=='ck'||(!p.t&&p.k)))return p.t?ctl(p,C[p.c],d.f):rm(p,C[p.c],typeof p.mid=='string'&&p.mid.length<41?p.mid:d.id);if(['ps','cs','acs','ds','hq'].includes(p.t))return selfIn(p)}if(p&&p.t=='bkw')return bkIn(p);if(p&&p.t=='pin')return pinIn(p);if(BLK().includes(d.f))return;if(p.t=='rq')return rq(p,d.f);const ch=C[p.c];if(!ch)return;if(p.t=='rj')return rjh(p,ch,d.f);
+  if(p&&p.t=='adm')return admIn(d.f,p);if(p&&(p.t=='acc'||p.t=='rj'||p.t=='acd'||p.t=='wipe')&&mgIn(d.f,p))return;if(p&&d.f!=me.id)delete p.sy;if(p&&d.f==me.id){if((p.sy==1||p.sy==2)&&C[p.c]&&(p.t=='ck'||(!p.t&&p.k)))return p.t?ctl(p,C[p.c],d.f):rm(p,C[p.c],typeof p.mid=='string'&&p.mid.length<41?p.mid:d.id);if(['ps','cs','acs','ds','hq'].includes(p.t))return selfIn(p)}if(p&&p.t=='nwa')return nwIn(p);if(p&&p.t=='pin')return pinIn(p);if(BLK().includes(d.f))return;if(p.t=='rq')return rq(p,d.f);const ch=C[p.c];if(!ch)return;if(p.t=='rj')return rjh(p,ch,d.f);
   if(p.t=='acc'){if(ch.wait&&!ch.host&&(!ch.rid||ch.rid==d.f)){ch.n=String(p.n||'').slice(0,20)||'مخاطب';await bind(ch,d.f);openChat(p.c);sendPf(p.c);ch.req&&dlg('','«'+ch.n+'» درخواست چت شما را پذیرفت')}return}
   if(ch.wait||ch.pk!=d.f)return;if(p.t)return ctl(p,ch,d.f);
   return rm(p,ch,typeof p.mid=='string'&&p.mid.length<41?p.mid:d.id)}
@@ -554,6 +560,7 @@ function rm(p,ch,id){if(TB.has(id)||ch.m.some(x=>x.id==id))return p.sy?0:dv(ch,p
   if(!seen&&!ch.closed)notify(p.c,s1?'🌟 استیکر':k=='i'?'📷 تصویر':k=='a'?'🎤 پیام صوتی':k=='v'?'🎬 ویدیو':k=='f'?'📎 فایل':x);
 }
 function notify(u,b){
+  if(nwLk(u))return;
   navigator.vibrate&&navigator.vibrate(120);
   if(!N||N.permission!='granted')return;
   const o={body:b.slice(0,100),tag:u,vibrate:[150]};
@@ -564,7 +571,7 @@ function add(u,m,unread){const c=C[u];if(m.k!='t'&&m.x){mput(m.id,m.x);if(m.x in
 
 /* صفحه‌ها */
 function draw(){
-  hpUp();bkUi();const l=srF(Object.keys(C).filter(u=>!C[u].closed&&!bkLk(u)).sort((a,b)=>(C[b].ts||0)-(C[a].ts||0)));
+  hpUp();nwUi();const l=srF(Object.keys(C).filter(u=>!C[u].closed&&!nwLk(u)).sort((a,b)=>(C[b].ts||0)-(C[a].ts||0)));
   $('#cl').innerHTML=l.map(u=>{const c=C[u],m=c.m[c.m.length-1];
     return `<div class="c" data-u="${u}" onclick="openChat('${u}')">${c.sv?`<div class="a" style="background:linear-gradient(135deg,#2a55d4,#2a9fd4)">${ic('mark')}</div>`:av(u,c.n,c.a)}<div class="f"><b>${esc(c.n)}</b><span>${SH[u]?esc(SH[u]):c.wait?'در انتظار…':m?(m.st?'🌟 استیکر':m.k=='i'?'📷 تصویر':m.k=='a'?'🎤 پیام صوتی':m.k=='v'?'🎬 ویدیو':m.k=='f'?'📎 فایل':esc(m.x.slice(0,50))):c.sv?'پیام‌ها و فایل‌های شخصی':'کد '+u}</span></div><div class="r"><small>${m?tm(m.ts):''}</small>${c.un?`<em>${c.un}</em>`:''}</div></div>`
   }).join('')||'<p class="e">هنوز چتی ندارید.<br>«چت جدید» را بزنید و کد را به مخاطب بدهید،<br>یا کد ۴ رقمی او را بالا وارد کنید.</p>';srRes();
@@ -577,7 +584,7 @@ function view(){selPrune();
   const atb=ms.scrollHeight-ms.scrollTop-ms.clientHeight<120;ms.innerHTML=ch.m.map((m,i)=>`<div class="b ${m.me?'me':'th'}${m.st?' sk':''}${SEL.has(m.id)?' sel':''}" data-i="${i}">${m.rp?qt(m.rp):''}${anOk(m)?anHtml(m,i):m.k=='i'?`<img src="${MC[m.id]||m.x||''}" onload="STICK&&bot()" ${m.st?(m.sp?`onclick="event.stopPropagation();spPeek(${i})"`:''):'onclick="event.stopPropagation();zoom(this.src)"'}>`:m.k=='a'?`<div class="vp" data-a="${esc(m.id)}" data-d="${m.dr||0}"><button class="pb">${ic('play')}</button><div class="bar"><div class="fl"></div></div><span class="du"></span></div>`:m.k=='v'?`<div class="vd" data-v="${esc(m.id)}"><video src="${MC[m.id]||''}#t=0.1" preload="metadata" muted playsinline onloadedmetadata="STICK&&bot()"></video><b>${ic('play')}</b></div>`:m.k=='f'?`<div class="fi2" data-f="${esc(m.id)}">${ic('file')}<span>${esc(m.nm||'فایل')}<small>${fmz(m.sz)}</small></span></div>`:lk(m.x)}${pg(m)}<i>${tm(m.ts)}${m.me&&!ch.sv?(m.s==2?' <span class="tk rd">✓✓</span>':m.s?' <span class="tk">✓</span>':' 🕓'):''}</i></div>`).join('');
   anMount();if(FC||atb){bot();setTimeout(()=>STICK&&bot(),300)}FC=0;ms.querySelectorAll('.vp').forEach(e=>vp(e.dataset.a));
 }
-function openChat(u){if(bkLk(u))return bkMsg();if(C[u]&&C[u].pk&&BLK().includes(C[u].pk))return dlg('چت قفل است','این مخاطب را مسدود کرده‌اید. برای دسترسی به چت، او را از فهرست مسدودها خارج کنید.');selClear();$('#stp').classList.remove('on');cur=u;C[u].un=0;sv();chUi(u);const f=!document.querySelector('#ch.on');FC=1;view();show('ch');f&&nav();bot();[60,200,500,1000].forEach(t=>setTimeout(()=>cur==u&&bot(),t));ack(u);loadMedia(u)}
+function openChat(u){if(nwLk(u))return nwMsg();if(C[u]&&C[u].pk&&BLK().includes(C[u].pk))return dlg('چت قفل است','این مخاطب را مسدود کرده‌اید. برای دسترسی به چت، او را از فهرست مسدودها خارج کنید.');selClear();$('#stp').classList.remove('on');cur=u;C[u].un=0;sv();chUi(u);const f=!document.querySelector('#ch.on');FC=1;view();show('ch');f&&nav();bot();[60,200,500,1000].forEach(t=>setTimeout(()=>cur==u&&bot(),t));ack(u);loadMedia(u)}
 function back0(){selClear();cur=null;$('#fu').value='';SRD=0;draw();show('ls');dirUnsub()}
 function back(){history.state&&history.state.n?history.back():back0()}
 function zoom(s){$('#v').classList.remove('fs');$('#vi').style.display='';$('#vv').style.display='none';$('#vi').src=s;$('#v').style.display='flex';nav();vFs()}
@@ -623,6 +630,7 @@ document.addEventListener('visibilitychange',()=>{cur&&ack(cur);if(document.visi
 function flush(f){cur&&ack(cur);L.dclr&&dirClr();if(f)for(const u in C){const c=C[u];if(c.req&&c.wait&&(NT['q'+u]=(NT['q'+u]||0)+1)<6)post(c.rid,{t:'rq',c:u,n:me.n,a:me.pic||''},rid())}for(const u in C){const ch=C[u];if(!ch.pk)continue;PS.has(u)||sendPf(u);ch.m.filter(m=>m.me&&m.s!=2&&!m.dl&&(m.s==0||(NT[m.id]||0)<(m.k=='t'?4:8))&&(f||Date.now()-(LT[m.id]||0)>Math.min(3e4*2**(NT[m.id]||0),6e5))).forEach(m=>go(ch,u,m))}}
 setInterval(()=>ready&&flush(),15000);
 async function wipe(){
+  if(nwAct())return nwMsg();
   if(!await dlg('حذف همه چت‌ها','همه پیام‌ها، تصاویر و چت‌ها هم از این دستگاه و هم از دستگاه همه مخاطبین پاک می‌شود و قابل بازیابی نیست. ادامه می‌دهید؟','حذف همه','انصراف'))return;
   await Promise.all(Object.keys(C).filter(u=>C[u].pk).map(u=>post(C[u].pk,{t:'wipe',c:u},rid())));
   for(const u in C){CL.forEach(x=>x.unsubscribe(P(u)));delete C[u]}K={};SEEN.clear();L.removeItem('ch');L.dv='';dirClr();L.removeItem('rq');L.removeItem('tb');idb('readwrite',s=>s.clear());for(const k in MC)delete MC[k];AU&&AU.a.pause();AU=0;back();dlg('','همه چت‌ها حذف شدند')
@@ -801,9 +809,9 @@ const tcss=i=>{const a=PAL[i]||PAL[0];return `header,.fb button,.in .sd,#sb butt
 function th2(){const i=TI(),t=PAL[i]||PAL[0];document.body.classList.toggle('dk',!!t[5]);$('meta[name=theme-color]').content=t[1];L.th=t[5]?'dk':'';let e=$('#ts');if(!e){e=document.createElement('style');e.id='ts';document.head.append(e)}e.textContent=tcss(i)+tcs3(t)}
 $('#pa').innerHTML=PAL.map((t,i)=>`<button class="tt" data-i="${i}" style="background:${t[12]};color:${t[9]}"><b style="background:linear-gradient(135deg,${t[1]},${t[2]})"></b><u style="background:${t[3]}"></u><span>${t[0]}</span></button>`).join('');
 
-$('#pa').onclick=e=>{const b=e.target.closest('.tt');if(b){L.tm=b.dataset.i;th2();setSt()}};
+$('#pa').onclick=e=>{const b=e.target.closest('.tt');if(b){L.tm=b.dataset.i;th2();setSt();clearTimeout(window._tdp);window._tdp=setTimeout(()=>{try{dirPub()}catch{}},3000)}};
 
-function setSt(){renderBk();$('#svc').checked=!!C.S;$('#sd2').checked=L.ns!='0';$('#spn').value=me.pn||'';$('#ad').value=L.ad||'0';$('#srt').checked=L.rt!='0';$('#shl').checked=L.hl=='1';$('#sic').checked=L.ic!='0';
+function setSt(){renderBk();nwUi();$('#svc').checked=!!C.S;$('#sd2').checked=L.ns!='0';$('#spn').value=me.pn||'';$('#ad').value=L.ad||'0';$('#srt').checked=L.rt!='0';$('#shl').checked=L.hl=='1';$('#sic').checked=L.ic!='0';
   document.querySelectorAll('#pa .tt').forEach((b,i)=>b.classList.toggle('on',i==TI()))}
 th2();
 const tone=(f,d=.12,t=0)=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();const o=AC.createOscillator(),g=AC.createGain(),q=AC.currentTime+t;o.frequency.value=f;g.gain.setValueAtTime(.12,q);g.gain.exponentialRampToValueAtTime(.001,q+d);o.connect(g);g.connect(AC.destination);o.start(q);o.stop(q+d)}catch{}};
@@ -851,7 +859,7 @@ async function dcl(u){const ch=C[u];if(!ch)return;const r=await dlg(ch.sv?'غی�
 function delChat(u,both){const ch=C[u];if(!ch)return;dchPush(u);both&&ch.pk&&post(ch.pk,{t:'wipe',c:u},rid());if(ch.wait)CL.forEach(x=>x.unsubscribe(P(u)));ch.m.forEach(m=>mdel(m.id));delete C[u];L.removeItem('bg_'+u);sv();cur==u?back():draw()}
 function tsv(on){if(on){C.S=C.S||{n:'چت ذخیره',m:[],ts:Date.now(),un:0,sv:1};sv();draw()}else if(C.S)dlg('غیرفعال کردن چت ذخیره','چت ذخیره و همهٔ محتوای آن پاک می‌شود.','حذف','انصراف').then(r=>r?delChat('S',0):$('#svc').checked=true)}
 function frw(i){const m=C[cur].m[i];if(m)frwL([m])}
-function frwL(a){FW=a;$('#fl').innerHTML=Object.keys(C).filter(u=>!C[u].wait&&!C[u].closed&&(C[u].pk||C[u].sv)).map(u=>{const c=C[u];return `<label>${c.sv?`<div class="a" style="background:linear-gradient(135deg,#2a55d4,#2a9fd4)">${ic('mark')}</div>`:av(u,c.n,c.a)}<span>${esc(c.n)}</span><input type="checkbox" value="${esc(u)}"></label>`}).join('')||'<p class="e">چت بازی وجود ندارد</p>';$('#fws').value='';$('#fw').style.display='flex'}
+function frwL(a){FW=a;$('#fl').innerHTML=Object.keys(C).filter(u=>!C[u].wait&&!C[u].closed&&!nwLk(u)&&(C[u].pk||C[u].sv)).map(u=>{const c=C[u];return `<label>${c.sv?`<div class="a" style="background:linear-gradient(135deg,#2a55d4,#2a9fd4)">${ic('mark')}</div>`:av(u,c.n,c.a)}<span>${esc(c.n)}</span><input type="checkbox" value="${esc(u)}"></label>`}).join('')||'<p class="e">چت بازی وجود ندارد</p>';$('#fws').value='';$('#fw').style.display='flex'}
 const fwx=()=>{$('#fw').style.display='none';SHF&&(L.removeItem('shp'),shClear());SHF=0;$('#fw h3').textContent='ارسال به…';const p=$('#fwp');p&&(p.style.display='none')};
 function fwo(){const sh=SHF,a=FW||[],ts=[...document.querySelectorAll('#fl input:checked')].map(x=>x.value);
   if(!ts.length)return fwx();
@@ -876,16 +884,16 @@ function bdg(){const b=document.querySelector('[onclick="openDr()"]'),n=RQ().len
 function dpic(){return new Promise(r=>{if(!me.pic)return r('');const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=56;c.getContext('2d').drawImage(im,0,0,56,56);r(c.toDataURL('image/jpeg',.6))};im.onerror=()=>r('');im.src=me.pic})}
 let DPL=0;
 function pubExp(a,secs){if(typeof mqtt=='undefined')return;BR.forEach(u=>{const c=mqtt.connect(u,{protocolVersion:5,clientId:'rx'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000}),z=()=>c.end(true);let n=0;c.on('connect',()=>a.forEach(([t,p])=>c.publish(t,p,{qos:1,retain:true,properties:{messageExpiryInterval:secs}},()=>++n==a.length&&z())));c.on('error',z);setTimeout(z,9000)})}
-async function dirPub(){if(!me||!me.ph)return;const ad=+L.ad||0;if(ad&&Date.now()-DPL<2e4)return;DPL=Date.now();const a=await dpic(),h=me.phh=await sh2(me.ph),p=JSON.stringify({id:me.id,n:me.n,a,ts:Date.now(),pv:me.pv0||await sh2(me.ph+':'+me.pn),ad,v:APPV}),l=JSON.stringify({ts:LSV});
-  CL.forEach(c=>c.connected&&!L.dmig&&c.publish('rc1/dir/'+me.id,'',{qos:1,retain:true}));L.dmig='1';const sx=await ssBuild(h),sy=await ssBuild2(h);
-  if(ad)return pubExp([['rc1/ph/'+h,p],...(L.hl=='1'?[]:[['rc1/ls/'+me.id,l]]),sx,sy],ad*2592e3);
-  CL.forEach(c=>{if(!c.connected)return;c.publish('rc1/ph/'+h,p,{qos:1,retain:true});L.hl=='1'||c.publish('rc1/ls/'+me.id,l,{qos:1,retain:true});c.publish(sx[0],sx[1],{qos:1,retain:true});c.publish(sy[0],sy[1],{qos:1,retain:true})})}
+async function dirPub(){if(!me||!me.ph)return;const ad=+L.ad||0;if(ad&&Date.now()-DPL<2e4)return;DPL=Date.now();const a=await dpic(),h=me.phh=await sh2(me.ph),p=JSON.stringify({id:me.id,n:me.n,a,ts:Date.now(),pv:me.pv0||await sh2(me.ph+':'+me.pn),ad,v:APPV,th:{m:(L.tm!=null&&L.tm!=='')?+L.tm:null,d:L.th=='dk'?1:0,p:+L.pal||0}}),l=JSON.stringify({ts:LSV});
+  CL.forEach(c=>c.connected&&!L.dmig&&c.publish('rc1/dir/'+me.id,'',{qos:1,retain:true}));L.dmig='1';const sx=await ssBuild(h),sy=await ssBuild2(h),gs=nwGuest();
+  if(ad)return pubExp([...(gs?[]:[['rc1/ph/'+h,p]]),...(L.hl=='1'?[]:[['rc1/ls/'+me.id,l]]),sx,sy],ad*2592e3);
+  CL.forEach(c=>{if(!c.connected)return;gs||c.publish('rc1/ph/'+h,p,{qos:1,retain:true});L.hl=='1'||c.publish('rc1/ls/'+me.id,l,{qos:1,retain:true});c.publish(sx[0],sx[1],{qos:1,retain:true});c.publish(sy[0],sy[1],{qos:1,retain:true})})}
 function dirClr(){}
 function dirIn(t,p){const id=t.slice(8);if(!ID.test(id)||id==me.id)return;if(!p.length){delete DIR[id];return drr()}
   try{const d=JSON.parse(new TextDecoder().decode(p)),n=String(d.n||'').trim().slice(0,20),a=typeof d.a=='string'&&/^data:image\/jpeg;base64,[\w+\/=]{1,12000}$/.test(d.a)?d.a:'';if(n&&Date.now()-(+d.ts||0)<5184e6){DIR[id]={n,a};drr()}}catch{}}
 const drr=()=>{clearTimeout(DRT);DRT=setTimeout(()=>{drd();SRD&&$('#ls.on')&&draw()},200)},dirUnsub=()=>CL.forEach(c=>c.connected&&c.unsubscribe(DT+'+'));
 function openDr(){drd();show('dr');nav()}
-function drd(){const rs=RQ(),ks=Object.keys(C).filter(k=>C[k].pk&&!bkLk(k));
+function drd(){const rs=RQ(),ks=Object.keys(C).filter(k=>C[k].pk&&!nwLk(k));
   $('#rql').innerHTML=rs.length?'<h4>درخواست‌های چت</h4>'+rs.map((r,i)=>`<div class="rq">${av(1,r.n,r.a)}<div class="f"><b>${esc(r.n)}</b><span>می‌خواهد با شما چت کند</span></div><button class="ok" onclick="acq(${i})">${ic('ok')}</button><button class="no" onclick="rjq(${i})">${ic('x')}</button><button class="bl" onclick="blq(${i})">${ic('block')}</button></div>`).join(''):'';
   $('#dl2').innerHTML='<h4>مخاطبین</h4>'+(ks.map(k=>`<div class="c" onclick="go2('${k}')">${av(k,C[k].n,C[k].a)}<div class="f"><b>${esc(C[k].n)}</b><span>${lsS(C[k].pk)}</span></div><button class="no" onclick="event.stopPropagation();dlc('${k}')">${ic('x')}</button></div>`).join('')||'<p class="e">هنوز مخاطبی ندارید.</p>')}
 $('#dl2').onclick=e=>{const r=e.target.closest('[data-d]');r&&sreq(r.dataset.d)};
@@ -994,7 +1002,7 @@ tsx('سلام','#e91e63'),tsx('ممنون','#2e9e5b'),tsx('عاشقتم','#d81b6
 [0,72,144,216,288].map(r=>`<ellipse cx="50" cy="26" rx="13" ry="20" fill="#f48fb1" transform="rotate(${r} 50 50)"/>`).join('')+'<circle cx="50" cy="50" r="12" fill="#fbc02d"/>',
 '<rect x="14" y="40" width="72" height="50" rx="6" fill="#e53935"/><rect x="10" y="30" width="80" height="16" rx="5" fill="#c62828"/><path d="M50 30v60" stroke="#ffd54f" stroke-width="9"/><path d="M50 30C30 8 16 26 50 30zm0 0C70 8 84 26 50 30z" fill="#ffd54f"/>'],GIRL,BOY].map(p=>p.map(sg));
 const MY=()=>JSON.parse(L.mys||'[]');
-function stk(){const p=$('#stp');if(p.classList.toggle('on')){$('#in').blur();stTab(L.stt);setTimeout(bot,60)}}
+function stk(){if(nwAct())return nwMsg();const p=$('#stp');if(p.classList.toggle('on')){$('#in').blur();stTab(L.stt);setTimeout(bot,60)}}
 const rast=(s,z=512)=>new Promise(r=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=z;const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(im,0,0,z,z);const d=c.toDataURL('image/webp',.95);r(d.startsWith('data:image/webp')?d:c.toDataURL('image/png'))};im.onerror=()=>r('');im.src=s});
 $('#fst').onchange=e=>{const fs=[...e.target.files];e.target.value='';fs.forEach(f=>{const im=new Image();im.onload=()=>{const z=Math.min(1,320/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*z);c.height=Math.round(im.height*z);c.getContext('2d').drawImage(im,0,0,c.width,c.height);let d=c.toDataURL('image/webp',.9);if(!d.startsWith('data:image/webp'))d=c.toDataURL('image/png');const a=MY();a.unshift(d);try{L.mys=JSON.stringify(a.slice(0,40))}catch{dlg('','حافظه پر است')}stTab('m')};im.src=URL.createObjectURL(f)})};
 $('#in').addEventListener('focus',()=>$('#stp').classList.remove('on'));
@@ -1011,29 +1019,26 @@ function phGet(h,al){return new Promise(async res=>{let w=0;const cl=[],end=x=>{
   BR.forEach(u=>{const c=mqtt.connect(u,{clientId:'rp'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000});cl.push(c);c.on('connect',()=>c.subscribe('rc1/ph/'+h));c.on('error',()=>{});
     c.on('message',(t,p)=>{try{const d=JSON.parse(new TextDecoder().decode(p));if(d&&ID.test(d.id)){if(al&&al(d)){c.publish(T(d.id),JSON.stringify({t:'sec',d:ssLab()}));setTimeout(()=>end(d),600)}else end(d)}}catch{}})});
   setTimeout(()=>end(null),7000)})}
-async function rg1(){BKM=0;let au=0;const p=$('#ph').value,n=$('#pw').value,t='+'+$('#cc').value+p;
-  if(bkLocked())return bkLockMsg();
+async function rg1(){NWF=0;const p=$('#ph').value,n=$('#pw').value,t='+'+$('#cc').value+p;
   if(p.length<6||p[0]=='0')return dlg('','شماره موبایل را بدون صفر و کامل وارد کنید');
   if(!/^\d{4,8}$/.test(n))return dlg('','رمز شخصی باید فقط عدد و بین ۴ تا ۸ رقم باشد');
   if(L.kpv&&L.kpv==await sh2(t+':'+n))return dlg('','این دستگاه توسط صاحب حساب از این حساب خارج شده است. برای ورود دوباره، صاحب حساب باید رمز شخصی را تغییر دهد و شما با رمز جدید وارد شوید.');
   if(!await dlg('تأیید شماره','شمارهٔ '+t+' درست است؟','تأیید','ویرایش'))return;
   await dlg('هشدار امنیتی','رمز شخصی را به هیچ‌کس ندهید. فقط با این رمز می‌توان وارد حساب شما شد.');
-  if(bkLocked())return bkLockMsg();
-  const b=$('#rg1b');b.disabled=1;const pv=await sh2(t+':'+n);const r=await phGet(await sh2(t),d=>d.pv==pv&&Date.now()-d.ts<2592e5&&(!me||me.id!=d.id));
-  let bc=null;if(n.length==8&&(!r||xp(r)||r.pv!=pv))bc=await bkCode(n);
+  const b=$('#rg1b');b.disabled=1;const pv=await sh2(t+':'+n);const r=await phGet(await sh2(t));
   b.disabled=0;
   if(r&&!xp(r)){
-    if(r.pv!=pv){
-      if(bc){if(!await bkUse(bc)){bkShow();return}BKM={hex:bc.hex,b:bc.b,pv:r.pv,o:r.id}}
-      else{const arm=!!L.bkv;bkShow();if(n.length==8&&arm)return bkWrong('رمز شخصی یا رمز پشتیبان اشتباه است.');return dlg('','این شماره قبلاً ثبت شده و رمز شخصی اشتباه است.')}
-    }else if(Date.now()-r.ts<2592e5&&(!me||me.id!=r.id)){if(!await reqApproval(t,n)){bkShow();return}au=1}
-    RECD=r;$('#rn').value=r.n
-  }else{if(bc)return dlg('','این رمز، رمز پشتیبان است و برای ثبت‌نام جدید قابل استفاده نیست.');if(me)$('#rn').value=me.n}
-  if(au&&RECD&&String(RECD.n||'').replace(/[\s\u200c-\u200f]/g,'')){$('#lgm').textContent='✅ ورود تأیید شد؛ در حال ورود…';return rg2()}
+    if(r.pv!=pv)return dlg('','این شماره قبلاً ثبت شده و رمز شخصی اشتباه است.');
+    RECD=r;$('#rn').value=r.n;
+    /* دستگاه جدید: با دانستن رمز شخصی ورود ممکن است؛ ۲۴ ساعت محدودیت دارد و به دستگاه قبلی هشدار داده می‌شود */
+    if(!me||me.id!=r.id){NWF=1;if(Date.now()-r.ts<2592e5)await reqLogin(t,n)}
+  }else{if(me)$('#rn').value=me.n}
+  if(NWF&&RECD&&String(RECD.n||'').replace(/[\s\u200c-\u200f]/g,'')){$('#lgm').textContent='✅ ورود انجام شد؛ در حال ورود…';return rg2()}
   $('#rg1').style.display='none';$('#rg2').style.display='flex'}
 async function rg2(){const n=$('#rn').value.trim().slice(0,20);if(!n.replace(/[\s\u200c-\u200f]/g,''))return dlg('','نام را بنویسید؛ وارد کردن نام الزامی است');
-  const ph='+'+$('#cc').value+$('#ph').value,pn=BKM?'':$('#pw').value,bk0=!!BKM;
-  if(me){bk0||(delete me.pv0,delete me.bk);Object.assign(me,{n,ph,pn,an:0},bkMe());RPC&&(me.pic=RPC);svMe();boot()}else reg(n,ph,pn,RPC||(RECD&&RECD.a)||'',bkMe())}
+  const ph='+'+$('#cc').value+$('#ph').value,pn=$('#pw').value,nw=NWF;
+  nw&&RECD&&RECD.th&&nwTheme(RECD.th);
+  if(me){delete me.pv0;delete me.nw;Object.assign(me,{n,ph,pn,an:0},nwMe());RPC&&(me.pic=RPC);svMe();boot()}else reg(n,ph,pn,RPC||(RECD&&RECD.a)||'',nwMe())}
 $('#rgp').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),z=Math.min(im.width,im.height);c.width=c.height=256;c.getContext('2d').drawImage(im,(im.width-z)/2,(im.height-z)/2,z,z,0,0,256,256);RPC=c.toDataURL('image/jpeg',.8);const i=$('#rgi');i.src=RPC;i.style.display='block'};im.src=URL.createObjectURL(f)};
 async function phS(){const p=$('#ph2').value,o=$('#phr2'),t='+'+$('#cc2').value+p;
   if(p.length<6||p[0]=='0')return dlg('','شماره را بدون صفر و کامل وارد کنید');if(!ready)return dlg('','اتصال به سرور برقرار نیست');
@@ -1044,7 +1049,7 @@ async function phS(){const p=$('#ph2').value,o=$('#phr2'),t='+'+$('#cc2').value+
   o.innerHTML=`<div class="rq">${av(1,PR.n,PR.a)}<div class="f"><b>${esc(PR.n)}</b><span>${esc(t)}</span></div><button class="ok" onclick="sreq(PR.id)">${ic('ok')}</button></div>`}
 async function dlc(k){if(await dlg('حذف مخاطب','این مخاطب و چت با او حذف شود؟','حذف','انصراف')){CL.forEach(x=>x.unsubscribe(P(k)));dchPush(k);delete C[k];sv();draw();drd()}}
 async function svPin(){
-  if(bkAct())return dlg('','چون با رمز پشتیبان وارد شده‌اید، تغییر رمز شخصی تا '+bkRem(me.bk.t+864e5-Date.now())+' دیگر ممکن نیست.');
+  if(nwAct())return dlg('','به‌دلیل ورود با دستگاه جدید، تغییر رمز شخصی تا '+nwRem(me.nw.t+864e5-Date.now())+' دیگر ممکن نیست.');
   const p=nd($('#spn').value.trim());if(!/^\d{4,8}$/.test(p))return dlg('','رمز شخصی جدید را وارد کنید (۴ تا ۸ رقم)');
   if(p==me.pn)return dlg('','رمز جدید با رمز فعلی یکسان است. یک رمز متفاوت انتخاب کنید.');
   if(!await dlg('تغییر رمز شخصی','رمز شخصی شما به یک رمز '+fd(p.length)+' رقمی جدید تغییر کند؟ از این پس برای ورود باید از رمز جدید استفاده کنید.','تغییر رمز','انصراف'))return;
@@ -1077,7 +1082,7 @@ async function ssIn2(t,p){if(!me||!me.ph)return;const h=await sh2(me.ph),pre='rc
   if(sid!=me.sid)ssNew(sid,d)}
 /* دستگاه تازه‌واردی که در فهرست دیده می‌شود: اعلان در زنگوله (اگر همین دستگاه خودش اجازه نداده باشد) */
 function ssNew(sid,d){let k=[];try{k=JSON.parse(L.ssk||'[]')}catch{}if(k.includes(sid))return;k.push(sid);try{L.ssk=JSON.stringify(k.slice(-100))}catch{}
-  if(Date.now()-(+d.t0)>6e5)return;const n=LRN[d.d];if(n&&Date.now()-n<18e4)return;lrNote(d.d,2)}
+  if(+d.t0<(me.t0||0))return;const n=LRN[d.d];if(n&&Date.now()-n<18e4)return;lrNote(d.d,2)}
 async function rvIn2(t,p){if(!p.length||!me||!me.ph)return;const h=await sh2(me.ph),sid=ssSid();if(t!='rc1/rd/'+h+'/'+sid)return;
   const d=JSON.parse(new TextDecoder().decode(p));if(!d||d.sid!=sid)return;{const k3=await ssK3();if(!(d.m==await sh2(await ksf()+':k2:'+sid)||(k3&&d.m3&&d.m3==await sh2(k3+':k3:'+sid))))return}
   const pv=await sh2(me.ph+':'+me.pn);try{CL.forEach(c=>c.end(true))}catch{}L.clear();try{indexedDB.deleteDatabase('rc');indexedDB.deleteDatabase('rcs')}catch{}L.kicked='1';L.kpv=pv;location.reload()}
@@ -1101,7 +1106,7 @@ async function rvIn(t,p){if(!p.length||!me||!me.ph)return;const h=await sh2(me.p
   const d=JSON.parse(new TextDecoder().decode(p));if(!d||d.id!=me.id||d.m!=await sh2(await ksf()+':k:'+me.id))return;
   const pv=await sh2(me.ph+':'+me.pn);try{CL.forEach(c=>c.end(true))}catch{}L.clear();try{indexedDB.deleteDatabase('rc');indexedDB.deleteDatabase('rcs')}catch{}L.kicked='1';L.kpv=pv;location.reload()}
 async function pinIn(p){if(!me||!me.ph||typeof p.np!='string'||!/^\d{4,8}$/.test(p.np))return;if(p.m!=await sh2(await ksf()+':p:'+p.np))return;me.pn=p.np;svMe();const e=$('#spn');e&&(e.value=me.pn);dirPub()}
-async function dla(){if(!me.pn)return dlg('','با ورود پشتیبان، رمز شخصی روی این دستگاه ثبت نیست. برای حذف حساب، ابتدا (پس از ۲۴ ساعت) یک رمز شخصی جدید ثبت کنید.');const p=await askPw('حذف حساب کاربری','برای حذف حساب، رمز شخصی خود را وارد کنید.','ادامه',v=>nd(v.trim())==me.pn?'':'رمز شخصی اشتباه است');if(p==null)return;
+async function dla(){if(nwAct())return nwMsg();const p=await askPw('حذف حساب کاربری','برای حذف حساب، رمز شخصی خود را وارد کنید.','ادامه',v=>nd(v.trim())==me.pn?'':'رمز شخصی اشتباه است');if(p==null)return;
   if(!await dlg('حذف حساب','حساب و همهٔ چت‌ها و فایل‌ها برای همیشه حذف می‌شود. ادامه می‌دهید؟','حذف حساب','انصراف'))return;
   await Promise.all(Object.keys(C).filter(u=>C[u].pk).map(u=>post(C[u].pk,{t:'acd',c:u},rid())));await post(me.id,{t:'acs'},rid());const h=await sh2(me.ph);
   CL.forEach(c=>c.connected&&['rc1/ph/'+h,'rc1/ls/'+me.id,'rc1/dir/'+me.id,'rc1/u/'+me.id,'rc1/ss/'+h+'/'+me.id,'rc1/sd/'+h+'/'+ssSid()].forEach(t=>c.publish(t,'',{qos:1,retain:true})));
@@ -1133,7 +1138,7 @@ async function selfIn(p){NSY=1;try{
  if(p.t=='ps'){if(typeof p.n=='string'&&p.n.trim())me.n=p.n.slice(0,20);if(typeof p.a=='string'&&(!p.a||/^data:image\/jpeg;base64,[\w+\/=]{1,150000}$/.test(p.a)))p.a?me.pic=p.a:delete me.pic;svMe();sp();draw()}
  else if(p.t=='cs'&&p.C&&typeof p.C=='object'){const dc=Array.isArray(p.d)?p.d:[];dc.forEach(u=>{if(C[u]){C[u].m.forEach(m=>mdel(m.id));delete C[u]}});let ch=0;
   for(const u in p.C){if(dc.includes(u))continue;const x=p.C[u];if(!x||!Array.isArray(x.m))continue;
-   if(!C[u]){C[u]=x;ch=1;x.pk&&CL.forEach(c=>c.connected&&c.subscribe('rc1/ls/'+x.pk,{qos:1}))}
+   if(!C[u]){C[u]=x;ch=1;nwAct()&&(me.nw.lk.push(u),svMe());x.pk&&CL.forEach(c=>c.connected&&c.subscribe('rc1/ls/'+x.pk,{qos:1}))}
    else{const ids=new Set(C[u].m.map(m=>m.id));x.m.forEach(m=>{if(!ids.has(m.id)&&!TB.has(m.id)){C[u].m.push(m);ch=1}});C[u].m.sort((a,b)=>(a.ts||0)-(b.ts||0))}}
   ch&&(sv(),draw())}
  else if(p.t=='ds'&&Array.isArray(p.ids)){const S=new Set(p.ids.filter(i=>typeof i=='string'&&i.length<41).slice(0,2000));let ch=0;S.forEach(i=>{TB.add(i);mdel(i)});for(const u in C){const n=C[u].m.length;C[u].m=C[u].m.filter(m=>!S.has(m.id));n!=C[u].m.length&&(ch=1)}L.tb=JSON.stringify([...TB].slice(-500));ch&&(sv(),draw(),cur&&C[cur]&&view())}
@@ -1162,27 +1167,23 @@ function lrAns(h,rid,ks,ok,e,lim){sh2(ks+':la:'+rid+':'+(ok?1:0)).then(m=>{const
 async function lrIn(t,p){if(!me||!me.ph||!p.length)return;const h=await sh2(me.ph),pre='rc1/lr/'+h+'/';if(!t.startsWith(pre))return;const rid=t.slice(pre.length);if(!/^[a-z0-9]{8,40}$/.test(rid)||LRS.has(rid))return;
   const d=JSON.parse(new TextDecoder().decode(p));if(!d||d.rid!=rid||typeof d.d!='string'||d.d.length>60||Math.abs(Date.now()-(+d.ts||0))>216e5)return;
   const ks=await ksf();if(d.m!=await sh2(ks+':lr:'+rid+':'+d.ts+':'+d.d))return;LRS.add(rid);
-  /* حداکثر ۳ درخواست تأیید ورود در هر ۲۴ ساعت */
-  const o=lrDay('lro');if(!o.some(x=>x.r==rid)){if(o.filter(x=>x.ok!=1).length>=3)return lrAns(h,rid,ks,0,0,1);o.push({r:rid,t:Date.now()});L.lro=JSON.stringify(o)}
-  let ok;if(lrSame(d.d)){ok=1;lrNote(d.d,0)}else{LRP=1;document.hidden&&lrAlert(d.d);try{ok=await dlg('درخواست ورود به حساب','دستگاهی با مشخصات «'+d.d+'» می‌خواهد با شمارهٔ شما وارد حساب شود. اگر خودتان هستید اجازه دهید؛ وگرنه رد کنید و رمز شخصی را تغییر دهید.','اجازه ورود','رد')}finally{LRP=0}ok&&lrNote(d.d,1)}
-  ok&&lrMark(rid);lrAns(h,rid,ks,ok,ok?(L.md2='1',await idPack(ks)):0,0)}
-async function reqApproval(ph,pn){
-  const w=lrDay('lrt');
-  if(w.length>=3){await dlg('','در هر ۲۴ ساعت فقط ۳ بار می‌توانید درخواست تأیید ورود بفرستید و سهمیهٔ شما تمام شده است. '+bkRem(864e5-(Date.now()-Math.min(...w)))+' دیگر دوباره امتحان کنید یا از رمز پشتیبان استفاده کنید.');return 0}
-  const tw=Date.now();w.push(tw);L.lrt=JSON.stringify(w);
-  const h=await sh2(ph),ks=await sh2('rc1k:'+ph+':'+pn),rid=Date.now().toString(36)+Math.random().toString(36).slice(2,10),d=ssLab(),ts=Date.now(),m=await sh2(ks+':lr:'+rid+':'+ts+':'+d),q=JSON.stringify({rid,d,ts,m}),g=$('#lgm'),b=$('#rg1b');let lim=0;
-  g.textContent='درخواست ورود برای صاحب حساب ارسال شد؛ منتظر تأیید او بمانید… (درخواست '+fd(w.length)+' از ۳ امروز)';b.disabled=1;
-  const ok=await new Promise(res=>{let fin=0,tm,iv;const cl=[],done=v=>{if(fin)return;fin=1;clearTimeout(tm);clearInterval(iv);cl.forEach(c=>c.end(true));res(v)};
+  /* ورود با رمز شخصی بدون پرسش: دستگاه جدید پذیرفته می‌شود و به این دستگاه هشدار داده می‌شود */
+  lrNote(d.d,2);nwWarn(d.d);lrMark(rid);lrAns(h,rid,ks,1,(L.md2='1',await idPack(ks)),0)}
+async function reqLogin(ph,pn){
+  const h=await sh2(ph),ks=await sh2('rc1k:'+ph+':'+pn),rid=Date.now().toString(36)+Math.random().toString(36).slice(2,10),d=ssLab(),ts=Date.now(),m=await sh2(ks+':lr:'+rid+':'+ts+':'+d),q=JSON.stringify({rid,d,ts,m}),g=$('#lgm'),b=$('#rg1b'),sk=$('#rgsk');
+  g.textContent='در حال ورود به حساب… اگر دستگاه قبلی شما روشن و رادچت در آن باز باشد، حساب و چت‌های شما منتقل می‌شود (حداکثر ۴۵ ثانیه).';b.disabled=1;sk.style.display='block';
+  const ok=await new Promise(res=>{let fin=0,tm,iv;const cl=[],done=v=>{if(fin)return;fin=1;NWSK=null;clearTimeout(tm);clearInterval(iv);cl.forEach(c=>{try{c.end(true)}catch{}});res(v)};NWSK=done;
     BR.forEach(u=>{const c=mqtt.connect(u,{clientId:'rl'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000});cl.push(c);c.on('connect',()=>c.subscribe('rc1/la/'+h+'/'+rid,{qos:1}));c.on('error',()=>{});
-      c.on('message',async(t,p)=>{try{const a=JSON.parse(new TextDecoder().decode(p));if(a.rid==rid&&a.m==await sh2(ks+':la:'+rid+':'+a.ok)){if(+a.ok){if(!a.e)return;window.XID=await idUnpack(ks,a.e);if(!window.XID)return}if(a.lim)lim=1;done(!!+a.ok)}}catch{}})});
-    const pq=()=>cl.forEach(c=>c.connected&&c.publish('rc1/lr/'+h+'/'+rid,q,{qos:1}));iv=setInterval(pq,6000);setTimeout(pq,1500);tm=setTimeout(()=>done(0),18e4)});
-  ok&&(L.lrt=JSON.stringify(lrDay('lrt').filter(x=>(x.t||x)!=tw)));g.textContent='';b.disabled=0;if(!ok)await dlg('',lim?'صاحب حساب در ۲۴ ساعت گذشته به‌اندازهٔ سقف مجاز (۳ بار) درخواست تأیید ورود دریافت کرده است. بعداً دوباره امتحان کنید.':'ورود تأیید نشد: صاحب حساب اجازه نداد یا پاسخ نداد. صاحب حساب باید در یکی از دستگاه‌های فعالش برنامه را باز کند و اجازه دهد.');return ok}
+      c.on('message',async(t,p)=>{try{const a=JSON.parse(new TextDecoder().decode(p));if(a.rid==rid&&a.m==await sh2(ks+':la:'+rid+':'+a.ok)){if(+a.ok){if(!a.e)return;window.XID=await idUnpack(ks,a.e);if(!window.XID)return}done(!!+a.ok)}}catch{}})});
+    const pq=()=>cl.forEach(c=>c.connected&&c.publish('rc1/lr/'+h+'/'+rid,q,{qos:1}));iv=setInterval(pq,6000);setTimeout(pq,1500);tm=setTimeout(()=>done(0),45e3)});
+  sk.style.display='none';g.textContent='';b.disabled=0;return ok}
+function nwSkip(){NWSK&&NWSK(0)}
 
 /* استیکر کیبورد (سامسونگ/جی‌بورد): ورودی قابل‌ویرایش که تصویر را می‌پذیرد؛ تصویر مستقیم به چت می‌رود و در کادر نمی‌ماند */
 function kbHook(e,send){
   const clean=()=>{if(!e.innerText.trim()&&!e.querySelector('img'))e.innerHTML=''},
   png=im=>new Promise(r=>{try{const c=document.createElement('canvas');c.width=im.naturalWidth||im.width||256;c.height=im.naturalHeight||im.height||256;c.getContext('2d').drawImage(im,0,0);c.toBlob(bl=>r(bl),'image/png')}catch{r(null)}}),
-  grab=()=>{e.querySelectorAll('img').forEach(im=>{const s=im.src;im.remove();s&&fetch(s).then(r=>r.blob()).then(send).catch(async()=>{const bl=await png(im);bl&&send(bl)})});clean()},
+  grab=()=>{e.querySelectorAll('img').forEach(im=>{const s=im.src;im.remove();s&&fetch(s).then(r=>r.blob()).then(send).catch(async()=>{if(!im.complete)await new Promise(r=>{im.onload=r;im.onerror=r;setTimeout(r,4000)});const bl=await png(im);bl&&send(bl)}).catch(()=>{})});clean()},
   files=ev=>kbFiles(ev);
   new MutationObserver(grab).observe(e,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});
   e.addEventListener('input',clean);
@@ -1192,6 +1193,11 @@ function kbHook(e,send){
 (()=>{const e=$('#in');
   Object.defineProperty(e,'value',{get(){return e.innerText.replace(/\u00a0/g,' ').replace(/\n$/,'')},set(v){e.textContent=v}});
   kbHook(e,b=>kbSend(b))})();
+/* جلوگیری از رفتن WebView به آدرس تصویر (ری‌استارت برنامه) وقتی استیکر/تصویر خارج از کادر پیام رها می‌شود */
+['dragenter','dragover','drop'].forEach(n=>document.addEventListener(n,ev=>{
+  if(!ev.dataTransfer)return;ev.preventDefault();
+  if(n=='drop'&&!(ev.target&&ev.target.closest&&ev.target.closest('#in'))){const f=kbFiles(ev);f&&cur&&kbSend(f)}
+},true));
 
 /* استیکرهای بیشتر: ۶ دستهٔ جدید، هر کدام ۳۰ استیکر */
 (()=>{const D='#3e2723',cols=['#ffca28','#ffb74d','#f48fb1','#81d4fa','#a5d6a7','#ce93d8'];
@@ -1503,6 +1509,19 @@ async function svDev(i){const m=C[cur]&&C[cur].m[i];if(!m||m.st)return;let b=BL[
  try{if(navigator.canShare&&navigator.canShare({files:[fl]})){await navigator.share({files:[fl],title:nm});return}}catch(e){if(e&&e.name=='AbortError')return}
  if(/;\s*wv\)|Version\/[\d.]+.*Chrome/.test(navigator.userAgent))return dlg('','این دستگاه ذخیرهٔ مستقیم فایل از داخل برنامه را پشتیبانی نمی‌کند.');
  const a=document.createElement('a'),o=URL.createObjectURL(fl);a.href=o;a.download=nm;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(o),6e4)}
+/* ذخیرهٔ عکس و ویدیو از نمایشگر (دکمهٔ ⬇) */
+async function saveBlob(b,nm,ty){
+  const fl=new File([b],nm,{type:ty||b.type||'application/octet-stream'});
+  try{if(navigator.canShare&&navigator.canShare({files:[fl]})){await navigator.share({files:[fl],title:nm});return}}catch(e){if(e&&e.name=='AbortError')return}
+  try{const a=document.createElement('a'),o=URL.createObjectURL(fl);a.href=o;a.download=nm;a.rel='noopener';a.style.display='none';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(o),12e4);toast('درخواست ذخیره ارسال شد: '+nm)}
+  catch{dlg('','ذخیرهٔ فایل در این دستگاه ممکن نشد')}}
+async function vSave(){
+  const vv=$('#vv'),vi=$('#vi'),isV=vv.style.display!='none',src=isV?(vv.currentSrc||vv.src):vi.src;if(!src)return;
+  let b;try{b=await(await fetch(src)).blob()}catch{}
+  if(!b)return dlg('','فایل هنوز در دسترس نیست');
+  const ty=(b.type||(isV?'video/mp4':'image/jpeg')).toLowerCase(),ex=(ty.split('/')[1]||'').split(';')[0].split('+')[0].replace('jpeg','jpg').replace('quicktime','mov').replace('x-matroska','mkv'),
+    nm='RadChat_'+new Date().toISOString().slice(0,19).replace(/\D/g,'')+(ex?'.'+ex:'');
+  await saveBlob(b,nm,ty)}
 /* مسدود کردن مخاطب */
 async function blkC(){const ch=C[cur];if(!ch||!ch.pk||ch.sv||BLK().includes(ch.pk))return;
  if(!await dlg('مسدود کردن','«'+ch.n+'» مسدود شود؟ تصویر پروفایل شما برای او پنهان می‌شود و چت تا رفع مسدودیت قفل خواهد بود.','مسدود کردن','انصراف'))return;
@@ -1794,75 +1813,47 @@ function askPw(t,b,ok,vf){return new Promise(r=>{
   $('#dy').onclick=()=>{const v=i.value.trim();if(!/^\d{4,8}$/.test(v)){e.textContent='رمز شخصی ۴ تا ۸ رقم است';return}const m=vf?vf(v):'';if(m){e.textContent=m;i.select();return}fin(v)};
   $('#dn').onclick=()=>fin(null)})}
 
-/* ===== رمز پشتیبان (یک‌بارمصرف) ===== */
-const BKL='Ub4pnK6YK3k/ohzcJW4HY6ossjWuaCZKzatrwPyLHS6/ywUvzZbRC7xs61YfYv/a2zQbQ5Ev1mWHEPDVYzmoyizBZrXAn+1TIuOYHq9rlu95VruK3/cf5+U/PN1GP9eheOP+z9yFfc3cQ1xKzlBgLJrtKx5RLcUskEOxbJZJ/DMxdJtx1k6Qt857tCYkoU8/yQofx6HEkYPhn4V6exGV1EE2kPIJ80lcXlB4RKWPVd/zMEJe8IYYJgfiKMXu5XQDVyTxgfhE9JwBE/uRxh47u783GYhyJoFNXHLH5aRsn77vJ8X2o5JqHQ4WsrnlK12rb7OOxgyLdeknqJgFnruoGlZSI/klFygrJspuzAaIObDNzXAtHBuPjbpG5R2B2AN/0vgYtAiWULYk3bos1he03xazNhflzXhCJSBExKbidUBSY+ct4HocmN+WWTOipIARqWMBxednYyPF+HYvdf/KVtCRSTLSfZmQgwPqPgU4iE1jxcQuBFImbjBtICEdtHPmNd+jFA03HbXLx8aUaDA17x47C17PIO0+7krBwXJ9mrQLZY/h6urB8VGyudpvoeJ6CMAYuw9mJHzvqNMKy9qG+YodjpW3Q3GkZHJVhj6Aeu1IPx2wfOvJs7O9ZvpTq6BEHG8y/qxf6CJ9qb3b3MQCjGizcFHRTDE1Wn7EVq0f9FiF1GfN9SwRE37j18qK/gu9+nS1ejFM22w3OxoN2P3GDug0hZ5qnxS5CaPH0T2V0gN4q7VTs+s+bpcHqkjrdtoOlDInooU3VdEI3XYC0y8jfS6U8ST3nRVbtc+hwd8I1BPwp4QGVNJQGP8Dhg93zsLFnQ6ks1meFJk4BjGkuxgqgZB013A7DZg/+skd0dRVEpzCvQj9bc2Csj9myI4AIdd0G7NDsftLn+KFeAIKQ7a1w2U5Ew8CgUj4rBq7vkgv8YbAd3UbjEHQ82GyuAgKjXrqJjAZ5M8+PeGbPzLZUFZdPw2GcBayAzsml9yi0Jju37R3A6BD/ClsyStrDrc7B9naUgNykNWbgwoGw5TOtW9+AcY5JzxTDjXfWMcjjQ3Afzy+TKA0HqSKloA1PfuOm4GtJR1eaF8XPEKdMmdJkW3Kf+oWAcI51byYaG1k26boXjVlZfKVMN/MlDze8MblzOgAN3uPjwd7OOcC/IlodfROmNTUAP/TMewgLNTvCp6mt5Dx1BmENZDLJ4HyyyqKXKWQhvNkLCPmb5YorjoAqedawn7OdplhyC3cz5x4k+407lR6vZSOldnlyQwa5DQ/Oll5BJayUg+Wn7xyUVGSOz7ovMZoCX45UHOgK/J17Jalf/UWfOh+c8bLqUeeq2eCqeD5cDN4bRnWJ42mGIJr4So1eBDTPimc/O9KEhALSyZ8z+7DRopwGCDWAlnLOD2v4iy2STM7+m67s9zANvueZkLzkSGW3oODm3cezNwblGaojZMH3irAouoS8RMmJyqKkadtky5DbkILvsa72lR/bX/uTt8l+CjUGhFI+D3Wk6P0zKwjaG1A0L3+ReUELHzB3MPAapcvkdMfTKCcv0xWuGhYs7P0sewKkbYLqjXoqZmJ4W6QJEcYc2dZtRrzb1bpWWSR';
-var BKM=0,BKA=0,BKB=0,BKW=0;
-function bkAll(){if(!BKA){BKA=new Set();for(let i=0;i+16<=BKL.length;i+=16)BKA.add(BKL.slice(i,i+16))}return BKA}
-function bkUsedL(){try{return JSON.parse(L.bku||'[]')}catch{return[]}}
-function bkLocalBurn(b){const a=bkUsedL();a.includes(b)||a.push(b);try{L.bku=JSON.stringify(a)}catch{}}
-function bkAct(){return !!(me&&me.bk&&Date.now()<me.bk.t+864e5)}
-function bkLk(u){return bkAct()&&me.bk.lk.includes(u)}
-function bkRem(ms){const m=Math.max(1,Math.ceil(ms/6e4)),h=Math.floor(m/60);return(h?fd(h)+' ساعت و ':'')+fd(m%60)+' دقیقه'}
-function bkMsg(){return dlg('دسترسی محدود','به‌دلیل ورود با رمز پشتیبان، دسترسی به چت‌ها و مخاطبین قبلی تا '+bkRem(me.bk.t+864e5-Date.now())+' دیگر محدود است. در این مدت می‌توانید مخاطب یا چت جدید اضافه کنید.')}
-async function bkDer(c){const E=new TextEncoder(),k=await crypto.subtle.importKey('raw',E.encode(c),'PBKDF2',false,['deriveBits']),d=new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:E.encode('rc1-backup-v1'),iterations:5e5},k,96));return{b:btoa(String.fromCharCode(...d)),hex:[...d].map(x=>x.toString(16).padStart(2,'0')).join('')}}
-async function bkCode(c){if(!/^\d{8}$/.test(c)||!window.crypto||!crypto.subtle)return null;try{const d=await bkDer(c);if(!bkAll().has(d.b))return null;d.used=bkUsedL().includes(d.b);return d}catch{return null}}
-function bkLocked(){let u=Math.max(+L.bkl||0,+((document.cookie.match(/rcbkl=(\d+)/)||[])[1])||0);if(u&&u<=Date.now()){L.removeItem('bkl');L.removeItem('bka');return 0}return u>Date.now()?u:0}
-function bkLockMsg(){const u=bkLocked();return dlg('برنامه قفل است','به‌دلیل چند بار وارد کردن رمز اشتباه، ورود به حساب تا '+bkRem(u-Date.now())+' دیگر ممکن نیست.')}
-function bkLock(){const u=Date.now()+864e5;L.bkl=''+u;try{document.cookie='rcbkl='+u+';max-age=86400;path=/;SameSite=Lax'}catch{}bkLockUi();bkLockMsg()}
-function bkLockUi(){const u=bkLocked(),e=$('#lgm');e&&u&&(e.textContent='ورود تا '+bkRem(u-Date.now())+' دیگر قفل است.')}
-function bkShow(){L.bkv='1';$('#bkb').style.display='block'}
-function bkWrong(m){const n=(+L.bka||0)+1;L.bka=n;if(n>3){bkLock();return false}dlg('',m+' (اشتباه '+fd(n)+' از ۳؛ اگر بیش از ۳ بار اشتباه وارد کنید، برنامه ۲۴ ساعت قفل می‌شود.)');return false}
-/* بازهٔ زمانی رزرو و علامت «مصرف‌شده» روی سرور (پیام ماندگار با نام مشتق‌شده از رمز، نه خود رمز) */
-function bkChk(hex){return new Promise(async res=>{let w=0,cn=0,t0=0;const cl=[],st={u:0,r:0},end=x=>{w||(w=1,cl.forEach(c=>{try{c.end(true)}catch{}}),res(x))},fin=()=>end(cn?(st.u?'u':st.r?'r':'f'):null);
-  for(let i=0;i<40&&typeof mqtt=='undefined';i++)await new Promise(r=>setTimeout(r,200));
-  if(typeof mqtt=='undefined')return end(null);
-  BR.forEach(u=>{const c=mqtt.connect(u,{clientId:'rb'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000});cl.push(c);c.on('error',()=>{});
-    c.on('connect',()=>{cn++;c.subscribe('rc1/bk/'+hex);t0||(t0=setTimeout(fin,3000))});
-    c.on('message',(t,p)=>{try{const d=JSON.parse(new TextDecoder().decode(p));if(d.s=='u')st.u=1;else if(d.s=='r'&&Date.now()-d.ts<6e5)st.r=1}catch{}})});
-  setTimeout(fin,8000)})}
-function bkMk(hex,s){return new Promise(async res=>{let w=0;const cl=[],end=x=>{w||(w=1,setTimeout(()=>cl.forEach(c=>{try{c.end(true)}catch{}}),3000),res(x))};
-  for(let i=0;i<40&&typeof mqtt=='undefined';i++)await new Promise(r=>setTimeout(r,200));
-  if(typeof mqtt=='undefined')return end(false);
-  BR.forEach(u=>{const c=mqtt.connect(u,{clientId:'rb'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000});cl.push(c);c.on('error',()=>{});
-    c.on('connect',()=>c.publish('rc1/bk/'+hex,JSON.stringify({s,ts:Date.now()}),{qos:1,retain:true},e=>{e||end(true)}))});
-  setTimeout(()=>end(false),8000)})}
-async function bkUse(bc){
-  if(bc.used)return bkWrong('این رمز پشتیبان قبلاً استفاده شده و باطل است.');
-  const s=await bkChk(bc.hex);
-  if(s===null){dlg('','اتصال به سرور برقرار نشد؛ اینترنت را بررسی و دوباره امتحان کنید.');return false}
-  if(s=='u'){bkLocalBurn(bc.b);return bkWrong('این رمز پشتیبان قبلاً استفاده شده و باطل است.')}
-  if(s=='r'){dlg('','این رمز پشتیبان هم‌اکنون در حال استفاده است. چند دقیقه بعد دوباره امتحان کنید.');return false}
-  if(!await bkMk(bc.hex,'r')){dlg('','اتصال به سرور برقرار نشد؛ دوباره امتحان کنید.');return false}
-  return true}
-/* پس از ورود موفق: رمز از فهرست برنامه حذف و روی سرور برای همیشه باطل می‌شود */
-function bkMe(){if(!BKM)return{};const k=BKM;BKM=0;bkLocalBurn(k.b);return{bk:{t:Date.now(),lk:Object.keys(C),h:k.hex,k:k.b,o:k.o},pv0:k.pv}}
-function bkNotify(){return new Promise(async res=>{const h=await sh2(me.ph),ids=new Set(),cl=[];let cn=0,w=0;
-  me.bk&&me.bk.o&&ID.test(me.bk.o)&&ids.add(me.bk.o);
+/* ===== ورود با دستگاه جدید: ۲۴ ساعت محدودیت ===== */
+/* با دانستن رمز شخصی می‌توان در دستگاه جدید وارد شد. تا ۲۴ ساعت: چت‌های موجود در حساب، استیکرهای ذخیره‌شده و دستگاه‌های فعال نمایش داده نمی‌شوند و رمز شخصی قابل تغییر نیست؛ به دستگاه قبلی هشدار ورود داده می‌شود. */
+var NWF=0,NWB=0,NWSK=null;
+function nwAct(){return !!(me&&me.nw&&Date.now()<me.nw.t+864e5)}
+function nwLk(u){return nwAct()&&me.nw.lk.includes(u)}
+function nwGuest(){return nwAct()&&!!me.nw.g}
+function nwRem(ms){const m=Math.max(1,Math.ceil(ms/6e4)),h=Math.floor(m/60);return(h?fd(h)+' ساعت و ':'')+fd(m%60)+' دقیقه'}
+function nwMsg(){return dlg('دسترسی محدود','به‌دلیل ورود با دستگاه جدید، نمایش چت‌های قبلی، استیکرهای ذخیره‌شده، دستگاه‌های فعال و تغییر رمز شخصی تا '+nwRem(me.nw.t+864e5-Date.now())+' دیگر ممکن نیست. در این مدت می‌توانید مخاطب یا چت جدید اضافه کنید.')}
+function nwMe(){if(!NWF)return{};NWF=0;const o={};try{Object.keys(C).forEach(u=>o[u]=1);window.XID&&window.XID.C&&Object.keys(window.XID.C).forEach(u=>o[u]=1)}catch{}
+  return{nw:{t:Date.now(),lk:Object.keys(o),g:window.XID?0:1,o:RECD&&ID.test(String(RECD.id))?RECD.id:''}}}
+function nwTheme(t){try{if(!t||typeof t!='object')return;
+  if(Number.isInteger(t.m)&&t.m>=0&&t.m<PAL.length)L.tm=''+t.m;else L.removeItem('tm');
+  L.th=t.d?'dk':'';if(Number.isInteger(t.p)&&t.p>=0&&t.p<100)L.pal=''+t.p;
+  th2()}catch{}}
+function nwWarn(l){try{if(document.visibilityState!='visible'||$('#md').style.display=='flex')return;dlg('هشدار ورود دستگاه جدید','دستگاه جدید «'+String(l).slice(0,40)+'» با رمز شخصی وارد حساب شما شد. اگر خودتان نبوده‌اید، از تنظیمات > حساب کاربری > دستگاه‌های فعال آن را حذف کنید و رمز شخصی را تغییر دهید.')}catch{}}
+/* هشدار به دستگاه‌های قبلی حساب (وقتی دستگاه جدید هویت جداگانه دارد) */
+function nwNotify(){return new Promise(async res=>{const h=await sh2(me.ph),ids=new Set(),cl=[];let cn=0,w=0;
+  me.nw&&me.nw.o&&ID.test(me.nw.o)&&ids.add(me.nw.o);
   const end=async x=>{if(w)return;w=1;cl.forEach(c=>{try{c.end(true)}catch{}});
     if(!x||!CL.some(c=>c.connected))return res(false);
     ids.delete(me.id);
-    try{await Promise.all([...ids].map(i=>post(i,{t:'bkw',h,ts:Date.now(),d:ssLab(),k:me.bk.k},rid())));res(true)}catch{res(false)}};
+    try{await Promise.all([...ids].map(i=>post(i,{t:'nwa',h,ts:Date.now(),d:ssLab()},rid())));res(true)}catch{res(false)}};
   for(let i=0;i<40&&typeof mqtt=='undefined';i++)await new Promise(r=>setTimeout(r,200));
   if(typeof mqtt=='undefined')return res(false);
   BR.forEach(u=>{const c=mqtt.connect(u,{clientId:'rn'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000});cl.push(c);c.on('error',()=>{});
     c.on('connect',()=>{cn++;c.subscribe(['rc1/ss/'+h+'/+','rc1/ph/'+h])});
     c.on('message',(t,p)=>{try{if(t.startsWith('rc1/ss/')){const id=t.split('/')[3];ID.test(id)&&ids.add(id)}else{const d=JSON.parse(new TextDecoder().decode(p));d&&ID.test(d.id)&&ids.add(d.id)}}catch{}})});
   setTimeout(()=>end(cn>0),5000)})}
-async function bkIn(p){try{if(!me||!me.ph||!p||p.h!==await sh2(me.ph)||!bkAll().has(String(p.k||'')))return;
-  dlg('هشدار ورود دستگاه جدید','یک دستگاه جدید ('+String(p.d||'نامشخص').slice(0,40)+') در '+new Date(+p.ts||Date.now()).toLocaleString('fa-IR')+' با «رمز پشتیبان» وارد حساب شما شد. اگر خودتان نبوده‌اید، فوراً رمز شخصی را از بخش تنظیمات تغییر دهید و با سازندهٔ برنامه تماس بگیرید.')}catch{}}
-function bkUi(){let e=$('#bkn');const on=bkAct();
-  if(!e){if(!on)return;e=document.createElement('div');e.id='bkn';e.style.cssText='margin:8px 12px;padding:10px 14px;border-radius:14px;background:#fff3cd;color:#664d03;font-size:13px;line-height:1.8';const cl=$('#cl');cl.parentNode.insertBefore(e,cl)}
-  e.style.display=on?'block':'none';on&&(e.textContent='ورود با رمز پشتیبان: دسترسی به چت‌ها و مخاطبین قبلی تا '+bkRem(me.bk.t+864e5-Date.now())+' دیگر محدود است. افزودن مخاطب و چت جدید آزاد است.')}
-async function bkTick(){try{
-  bkLockUi();
-  if(me&&me.ph){L.bkv&&L.removeItem('bkv');L.bka&&L.removeItem('bka')}
-  if(!me||!me.bk)return;const k=me.bk;
-  if(!k.b&&!BKB){BKB=1;try{if(await bkMk(k.h,'u')){k.b=1;svMe()}}finally{BKB=0}}
-  if(!k.w&&!BKW&&me.ph&&me.id){BKW=1;try{if(await bkNotify()){k.w=1;svMe()}}finally{BKW=0}}
-  if(Date.now()>k.t+864e5&&k.b&&k.w){delete me.bk;svMe();draw()}
-  else bkUi()}catch{}}
-setInterval(bkTick,12000);setTimeout(bkTick,3000);
-if(L.bkv)$('#bkb').style.display='block';bkLockUi();
+async function nwIn(p){try{if(!me||!me.ph||!p||p.h!==await sh2(me.ph))return;const k=String(+p.ts||0);if(L.nwt==k)return;L.nwt=k;
+  dlg('هشدار ورود دستگاه جدید','یک دستگاه جدید ('+String(p.d||'نامشخص').slice(0,40)+') در '+new Date(+p.ts||Date.now()).toLocaleString('fa-IR')+' با رمز شخصی وارد حساب شما شد. اگر خودتان نبوده‌اید، از تنظیمات > حساب کاربری > دستگاه‌های فعال آن را حذف کنید و رمز شخصی را تغییر دهید.')}catch{}}
+function nwUi(){const on=nwAct();let e=$('#nwn');
+  if(!e&&on){e=document.createElement('div');e.id='nwn';e.style.cssText='margin:8px 12px;padding:10px 14px;border-radius:14px;background:#fff3cd;color:#664d03;font-size:13px;line-height:1.8';const cl=$('#cl');cl&&cl.parentNode.insertBefore(e,cl)}
+  if(e){e.style.display=on?'block':'none';on&&(e.textContent='ورود با دستگاه جدید: تا '+nwRem(me.nw.t+864e5-Date.now())+' دیگر نمایش چت‌های قبلی، استیکرهای ذخیره‌شده، دستگاه‌های فعال و تغییر رمز شخصی ممکن نیست. افزودن مخاطب و چت جدید آزاد است.')}
+  const sb=$('#ssb'),sl=$('#ssl'),sk=$('#skd');
+  if(sb)sb.style.display=on?'none':'';if(sl&&on)sl.style.display='none';if(sk)sk.style.display=on?'none':''}
+async function nwTick(){try{
+  if(!me||!me.nw){nwUi();return}const k=me.nw;
+  if(k.g&&!k.w&&!NWB&&me.ph&&me.id){NWB=1;try{if(await nwNotify()){k.w=1;svMe()}}finally{NWB=0}}
+  if(Date.now()>k.t+864e5&&(!k.g||k.w)){delete me.nw;svMe();draw();nwUi()}
+  else nwUi()}catch{}}
+setInterval(nwTick,12000);setTimeout(nwTick,3000);
 
 
 /* ======================================================================
@@ -2042,7 +2033,8 @@ function kbFiles(ev){
   return a.find(x=>/^image\//.test(x.type)||/\.(png|webp|gif|jpe?g)$/i.test(x.name||''))||null}
 function hasAlpha(im){try{const c=document.createElement('canvas');c.width=c.height=48;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0,48,48);const d=g.getImageData(0,0,48,48).data;for(let i=3;i<d.length;i+=4)if(d[i]<250)return true}catch{}return false}
 let KBL=['',0];
-async function kbSend(b){
+async function kbSend(b){try{await kbSend0(b)}catch(e){}}
+async function kbSend0(b){
   if(!b||!cur||!C[cur]||C[cur].wait)return;
   const key=(b.name||'')+'|'+b.size+'|'+b.type;
   if(KBL[0]==key&&Date.now()-KBL[1]<2000)return;KBL=[key,Date.now()];
@@ -2148,7 +2140,7 @@ async function pwaInstall(){
 $('#fws').oninput=()=>{const q=nd($('#fws').value).trim().toLowerCase();document.querySelectorAll('#fl label').forEach(l=>l.style.display=!q||l.textContent.toLowerCase().includes(q)?'':'none')};
 
 /* ---------- نسخهٔ برنامه ---------- */
-{const c=$('#cr');c&&c.insertAdjacentHTML('beforeend','<br><small dir="ltr">RadChat v'+APPV+'</small>')}
+{const c=$('#cr');c&&c.insertAdjacentHTML('beforeend','<br><small>نسخهٔ برنامه: <b dir="ltr">'+APPV+'</b></small>')}
 function vcmp(a,b){const x=String(a||'').split('.').map(n=>+n||0),y=String(b||'').split('.').map(n=>+n||0);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d}return 0}
 
 /* ---------- مدیر: «show all» با نسخهٔ برنامهٔ هر کاربر ---------- */
@@ -2180,6 +2172,7 @@ function ssDraw(){
     return `<div class="rw ss${x.unv?' unv':''}"><div class="f"><b>${esc(x.d)}</b>${i?`<small>آخرین فعالیت: ${ssT(x.ts)}${idle?' (مدتی است فعال نیست)':''}</small>`:'<small style="color:#2e7d32">● این دستگاه (آنلاین)</small>'}<small>زمان ورود: ${ssT(x.t0)}${x.v?' · نسخه '+esc(String(x.v)):''}</small>${x.unv?'<small style="color:#c0262d">تأییدنشده: با رمز شخصی یا نسخهٔ متفاوت وارد شده یا جعلی است.</small>':''}</div>${i?`<button class="dg" onclick="ssKick(${i})">حذف</button>`:''}</div>`}).join('')+
    (SSR.length>1?'<button class="dg" onclick="ssKickAll()">خروج از همهٔ دستگاه‌های دیگر</button>':'<p class="e">دستگاه دیگری وارد این حساب نشده است.</p>')}
 function ssTog(){
+  if(nwAct())return nwMsg();
   const b=$('#ssl'),o=b.style.display=='none';
   b.style.display=o?'block':'none';$('#ssb').textContent=(o?'▴':'▾')+' دستگاه‌های فعال';
   if(o){dirPub();ssDraw();CL.forEach(c=>c.connected&&ssSub(c))}}
