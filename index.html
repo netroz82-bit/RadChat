@@ -443,8 +443,8 @@ const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
    مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
    این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود.
    APPN هم شرح کوتاه همین آپدیت است و به‌صورت خودکار به زنگولهٔ همهٔ کاربران ارسال می‌شود؛ در هر آپدیت آن را هم به‌روز کن. */
-const APPV='26.11.6.4.16';
-const APPN='تغییرات این نسخه: ورود با رمز شخصی در دستگاه جدید (با محدودیت ۲۴ ساعته و هشدار به دستگاه قبلی)، بازیابی مخاطبین نسخهٔ قبلی، ذخیرهٔ عکس و ویدیو از نمایشگر، حذف دکمهٔ نصب و اشتراک‌گذاری از تنظیمات و بهبودهای دیگر.';
+const APPV='26.11.8.21.38';
+const APPN='تغییرات این نسخه: کیفیت بهتر استیکرها (پیش‌نمایش استیکرهای متحرک تلگرام و «استیکرهای من» با وضوح ۵۱۲)، بهبود دریافت استیکر از کیبورد و ابزار عیب‌یابی برای مدیر.';
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -1003,7 +1003,7 @@ tsx('سلام','#e91e63'),tsx('ممنون','#2e9e5b'),tsx('عاشقتم','#d81b6
 const MY=()=>JSON.parse(L.mys||'[]');
 function stk(){if(nwAct())return nwMsg();const p=$('#stp');if(p.classList.toggle('on')){$('#in').blur();stTab(L.stt);setTimeout(bot,60)}}
 const rast=(s,z=512)=>new Promise(r=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=z;const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(im,0,0,z,z);const d=c.toDataURL('image/webp',.95);r(d.startsWith('data:image/webp')?d:c.toDataURL('image/png'))};im.onerror=()=>r('');im.src=s});
-$('#fst').onchange=e=>{const fs=[...e.target.files];e.target.value='';fs.forEach(f=>{const im=new Image();im.onload=()=>{const z=Math.min(1,320/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*z);c.height=Math.round(im.height*z);c.getContext('2d').drawImage(im,0,0,c.width,c.height);let d=c.toDataURL('image/webp',.9);if(!d.startsWith('data:image/webp'))d=c.toDataURL('image/png');const a=MY();a.unshift(d);try{L.mys=JSON.stringify(a.slice(0,40))}catch{dlg('','حافظه پر است')}stTab('m')};im.src=URL.createObjectURL(f)})};
+$('#fst').onchange=e=>{const fs=[...e.target.files];e.target.value='';fs.forEach(f=>{const im=new Image();im.onload=()=>{const z=Math.min(1,512/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*z);c.height=Math.round(im.height*z);const g2=c.getContext('2d');g2.imageSmoothingQuality='high';g2.drawImage(im,0,0,c.width,c.height);let d=c.toDataURL('image/webp',.9);if(!d.startsWith('data:image/webp'))d=c.toDataURL('image/png');const a=MY();a.unshift(d);try{L.mys=JSON.stringify(a.slice(0,40))}catch{dlg('','حافظه پر است')}stTab('m')};im.src=URL.createObjectURL(f)})};
 $('#in').addEventListener('focus',()=>$('#stp').classList.remove('on'));
 
 /* حساب با شماره موبایل، یافتن مخاطب با شماره، آخرین بازدید */
@@ -1186,12 +1186,26 @@ function kbHook(e,send){
   files=ev=>kbFiles(ev);
   new MutationObserver(grab).observe(e,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});
   e.addEventListener('input',clean);
-  e.addEventListener('beforeinput',ev=>{const f=files(ev);if(f){ev.preventDefault();send(f)}});
+  e.addEventListener('beforeinput',ev=>{const f=files(ev);if(f){ev.preventDefault();send(f)}else if(/^(content|file):\/\//i.test(String(ev.data||'').trim()))ev.preventDefault()});
   e.addEventListener('drop',ev=>{const f=files(ev);ev.preventDefault();f&&send(f)});
   e.addEventListener('paste',ev=>{const cd=ev.clipboardData;if(!cd)return;const f=files(ev);ev.preventDefault();f?send(f):document.execCommand('insertText',false,cd.getData('text/plain'))})}
 (()=>{const e=$('#in');
   Object.defineProperty(e,'value',{get(){return e.innerText.replace(/\u00a0/g,' ').replace(/\n$/,'')},set(v){e.textContent=v}});
   kbHook(e,b=>kbSend(b))})();
+/* گزارش عیب‌یابی استیکر کیبورد: مدیر در چت ذخیره «kb log» را بنویسد */
+const KBG=()=>{try{return JSON.parse(L.kbg||'[]')}catch{return[]}};
+function kbLog(t){try{const a=KBG();a.push(new Date().toLocaleTimeString('en-GB')+' '+String(t).slice(0,170));L.kbg=JSON.stringify(a.slice(-60))}catch{}}
+{const e=$('#in'),dt=d=>{try{return d?'types='+[...(d.types||[])].join(',')+' files='+(d.files?d.files.length:0)+' items='+(d.items?[...d.items].map(i=>i.kind+':'+i.type).join(','):''):'none'}catch{return'?'}};
+ e.addEventListener('beforeinput',ev=>{if(ev.dataTransfer||!/^(insertText|insertCompositionText|deleteContent|deleteComposition|insertLineBreak|insertParagraph|historyUndo|historyRedo)/.test(ev.inputType||''))kbLog('beforeinput '+ev.inputType+' data='+String(ev.data||'').slice(0,40)+' '+dt(ev.dataTransfer))},true);
+ e.addEventListener('paste',ev=>kbLog('paste '+dt(ev.clipboardData)),true);
+ e.addEventListener('drop',ev=>kbLog('drop '+dt(ev.dataTransfer)),true);
+ new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeName=='IMG')kbLog('img inserted src='+String(n.src||'').slice(0,60))}))).observe(e,{childList:true,subtree:true});
+ ['pagehide','pageshow','freeze','resume','beforeunload'].forEach(n=>addEventListener(n,()=>kbLog('window '+n)));
+ document.addEventListener('visibilitychange',()=>kbLog('visibility '+document.visibilityState));
+ addEventListener('error',ev=>kbLog('error '+String(ev.message||'').slice(0,100)));
+ addEventListener('unhandledrejection',ev=>kbLog('rejection '+String(ev.reason&&ev.reason.message||ev.reason||'').slice(0,100)))}
+function kbShow(){let o=$('#adh');if(!o){o=document.createElement('div');o.id='adh';document.body.appendChild(o)}
+ const a=KBG();o.innerHTML='<details open><summary>گزارش کیبورد ('+a.length+' رویداد)</summary><pre dir="ltr" style="white-space:pre-wrap;word-break:break-all;font-size:11px;margin:6px 4px">'+(a.length?esc(a.join('\n')):'هنوز رویدادی ثبت نشده است. یک استیکر کیبورد را در کادر پیام بفرستید و دوباره «kb log» را بنویسید.')+'</pre></details><button class="xx" onclick="this.parentNode.style.display=\'none\'">بستن</button>';o.style.display='block'}
 /* جلوگیری از رفتن WebView به آدرس تصویر (ری‌استارت برنامه) وقتی استیکر/تصویر خارج از کادر پیام رها می‌شود */
 ['dragenter','dragover','drop'].forEach(n=>document.addEventListener(n,ev=>{
   if(!ev.dataTransfer)return;ev.preventDefault();
@@ -1342,11 +1356,31 @@ async function tgOne(s0,x){
   try{const fl=await tgApi('getFile?file_id='+encodeURIComponent(f.file_id),x);
     if(!fl||!fl.file_path)throw{d:'no-path'};
     s='download';const bl=await tgFile(fl.file_path,x);
-    s='decode';const d=await tgImg(bl,512);if(!d)throw{d:'decode-failed'};
+    s='decode';let d=await tgImg(bl,512);if(!d)throw{d:'decode-failed'};
     let a=0;
     if(mv)for(let k=0;k<2&&!a&&x.left()>1500;k++)a=await tgAnim(s0,x);
+    if(a){try{const p=await tgPoster(a);p&&(d=p)}catch{}}
     return{u:d,mv,a}}
   catch(e){e=e||{};e.s=e.s||s;return{e,mv}}}
+/* تصویر ثابت با وضوح ۵۱۲ از خود فایل متحرک (به‌جای تصویر کوچک تلگرام) */
+function tgFilled(c){try{const t=document.createElement('canvas');t.width=t.height=48;const g=t.getContext('2d',{willReadFrequently:true});g.drawImage(c,0,0,48,48);const d=g.getImageData(0,0,48,48).data;let n=0;for(let i=3;i<d.length;i+=4)d[i]>24&&n++;return n>60}catch{return true}}
+function tgCanvasOut(c){let d=c.toDataURL('image/webp',.92);d.startsWith('data:image/webp')||(d=c.toDataURL('image/png'));return tgFilled(c)?d:''}
+function tgPosterWebm(b){return new Promise(r=>{const u=URL.createObjectURL(b),v=document.createElement('video');let done=0;const fin=d=>{if(done)return;done=1;try{URL.revokeObjectURL(u);v.removeAttribute('src');v.load()}catch{}r(d)};
+  v.muted=true;v.playsInline=true;v.preload='auto';
+  v.onloadeddata=()=>{try{v.currentTime=Math.min(.15,(v.duration||1)/4)}catch{fin('')}};
+  v.onseeked=()=>{try{const W=v.videoWidth,H=v.videoHeight;if(!W||!H)return fin('');const k=Math.min(1,512/Math.max(W,H)),c=document.createElement('canvas');c.width=Math.round(W*k);c.height=Math.round(H*k);const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(v,0,0,c.width,c.height);fin(tgCanvasOut(c))}catch{fin('')}};
+  v.onerror=()=>fin('');setTimeout(()=>fin(''),7000);v.src=u})}
+async function tgPosterTgs(b){let host=0,an=0;try{const lt=await ltLoad();if(!lt)return'';const j=await tgsData(b);
+  host=document.createElement('div');host.style.cssText='position:fixed;left:-9999px;top:0;width:512px;height:512px;pointer-events:none';document.body.appendChild(host);
+  an=lt.loadAnimation({container:host,renderer:'svg',loop:false,autoplay:false,animationData:JSON.parse(JSON.stringify(j)),rendererSettings:{preserveAspectRatio:'xMidYMid meet'}});
+  await new Promise(r=>{let d=0;const f=()=>{d||(d=1,r())};try{an.addEventListener('DOMLoaded',f)}catch{}setTimeout(f,2500)});
+  const tf=Math.max(1,Math.round((an.totalFrames||30)-1)),try_=async fr=>{try{an.goToAndStop(fr,true)}catch{}
+    const svg=host.querySelector('svg');if(!svg)return'';svg.setAttribute('xmlns','http://www.w3.org/2000/svg');svg.setAttribute('width','512');svg.setAttribute('height','512');
+    const img=await new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>r(0);i.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(svg))});
+    if(!img)return'';const c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(img,0,0,512,512);return tgCanvasOut(c)};
+  for(const f of [Math.round(tf*.25),Math.round(tf*.5),0]){const d=await try_(f);if(d)return d}
+  return''}catch{return''}finally{try{an&&an.destroy()}catch{}host&&host.remove()}}
+async function tgPoster(a){if(!a||!a.b)return'';return a.t=='webm'?tgPosterWebm(a.b):a.t=='tgs'?tgPosterTgs(a.b):''}
 /* فایل اصلی استیکر متحرک: webm (ویدیویی) یا tgs (لاتی) */
 async function tgAnim(s0,x){
   try{const fl=await tgApi('getFile?file_id='+encodeURIComponent(s0.file_id),x);
@@ -1626,13 +1660,15 @@ setTimeout(()=>{try{isAdm()&&mgGc()}catch{}},15000);
 function admList(){let o=$('#adl');if(!o){o=document.createElement('div');o.id='adl';o.innerHTML='<div class="ah"><button onclick="history.back()">➜</button><b>کاربران برنامه</b><span id="adc"></span></div><input id="ads" placeholder="جستجوی نام یا شماره…" autocomplete="off" dir="auto" oninput="admDraw()" style="margin:8px 12px;padding:10px 12px;border-radius:12px;border:1px solid #8884;background:transparent;color:inherit;font:inherit"><div id="avs"></div><div id="adr"></div><div id="adm" style="display:none"><textarea id="adt"></textarea><button onclick="admPm()">ارسال</button></div>';document.body.appendChild(o)}admDraw();o.style.display='flex';nav();$('#adc').textContent='در حال دریافت همهٔ کاربران…';mgScan(true).then(sc=>{SCN=sc;admDraw()}).catch(()=>{admDraw()})}
 function admPick(i){ADT=i;$('#adm').style.display='flex';$('#adt').placeholder='پیام خصوصی برای '+((ALL[i]||SCN[i]||{}).n||'')+'…';$('#adt').focus()}
 async function admPm(){const t=$('#adt').value.trim();if(!t||!ADT)return;const ok=await admPost(ADT,{t:'adm',a:'pm',i:rid(),x:t.slice(0,4000),ts:Date.now()});toast(ok?'پیام ارسال شد':'ارسال نشد');ok&&($('#adt').value='')}
-{const o=snd;snd=async function(k,x,...r){const ch=C[cur],adm=!!(ch&&ch.sv&&isAdm()),bc=adm&&BC;adm&&(BC=0);const res=await o.call(this,k,x,...r);if(adm){if(bc)admBroadcast(k,x);else if(k=='t'&&typeof x=='string'){const c=x.trim().toLowerCase().replace(/\s+/g,' ');if(c=='delete last ntf')admDelNtf(0);else if(c=='delete all ntf')admDelNtf(1);else if(c=='send to all'){BC=1;sysLine('✅ پیام بعدی شما (متن، لینک، عکس، ویدیو یا صوت کوچک) برای همه کاربران ارسال می‌شود.')}else if(c=='show all')admList();else if(c=='start'||c=='/start')admHelp();else if(c=='send update')admBroadcast('t',admUpdTxt())}}return res}}
+{const o=snd;snd=async function(k,x,...r){const ch=C[cur],adm=!!(ch&&ch.sv&&isAdm()),bc=adm&&BC;adm&&(BC=0);const res=await o.call(this,k,x,...r);if(adm){if(bc)admBroadcast(k,x);else if(k=='t'&&typeof x=='string'){const c=x.trim().toLowerCase().replace(/\s+/g,' ');if(c=='delete last ntf')admDelNtf(0);else if(c=='delete all ntf')admDelNtf(1);else if(c=='send to all'){BC=1;sysLine('✅ پیام بعدی شما (متن، لینک، عکس، ویدیو یا صوت کوچک) برای همه کاربران ارسال می‌شود.')}else if(c=='show all')admList();else if(c=='start'||c=='/start')admHelp();else if(c=='send update')admBroadcast('t',admUpdTxt());else if(c=='kb log')kbShow();else if(c=='kb clear'){L.kbg='[]';toast('گزارش کیبورد پاک شد')}}}return res}}
 /* ---------- راهنمای دستورات مدیر: در چت ذخیره بنویسید «start» ---------- */
 const ADMC=[
  {c:'start',d:'نمایش همین راهنمای دستورات'},
  {c:'show all',d:'فهرست همهٔ کاربرانی که حساب رادچت دارند، با نسخه، شماره و آخرین فعالیت (امکان جستجو)'},
  {c:'send to all',d:'پیام بعدی شما (متن، لینک، عکس، ویدیو یا صوت کوچک) در زنگولهٔ همهٔ کاربران ثبت می‌شود'},
  {c:'send update',d:'ارسال دوبارهٔ اعلان نسخهٔ فعلی برنامه (شمارهٔ نسخه و شرح تغییرات) به زنگولهٔ همهٔ کاربران'},
+ {c:'kb log',d:'نمایش گزارش رویدادهای کیبورد (برای عیب‌یابی ارسال استیکر کیبورد)'},
+ {c:'kb clear',d:'پاک کردن گزارش کیبورد'},
  {c:'delete last ntf',d:'حذف آخرین اعلان مدیر از زنگولهٔ همهٔ کاربران'},
  {c:'delete all ntf',d:'حذف همهٔ اعلان‌های مدیر از زنگولهٔ همهٔ کاربران'}];
 function admHelp(){let o=$('#adh');if(!o){o=document.createElement('div');o.id='adh';document.body.appendChild(o)}
@@ -1977,7 +2013,7 @@ function anMount(){
 /* ---------- ارسال استیکر متحرک ---------- */
 async function anSend(a,thumb,sp){
   const ch=C[cur];if(!cur||!ch||ch.wait)return;
-  let th='';try{th=await tgRs(thumb,96)}catch{}
+  let th='';try{th=await tgRs(thumb,192);if(th.length>38000)th=await tgRs(thumb,128);if(th.length>38000)th=await tgRs(thumb,96)}catch{}
   if(th.length>38000)th='';
   const w=a.t=='webm',f=new File([a.b],w?'sticker.webm':'sticker.tgs',{type:w?'video/webm':'application/gzip'});
   snd(w?'v':'f',f,0,1,sp,a.t,th)}
