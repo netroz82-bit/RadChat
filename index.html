@@ -443,8 +443,8 @@ const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
    مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
    این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود.
    APPN هم شرح کوتاه همین آپدیت است و به‌صورت خودکار به زنگولهٔ همهٔ کاربران ارسال می‌شود؛ در هر آپدیت آن را هم به‌روز کن. */
-const APPV='26.11.8.21.38';
-const APPN='تغییرات این نسخه: کیفیت بهتر استیکرها (پیش‌نمایش استیکرهای متحرک تلگرام و «استیکرهای من» با وضوح ۵۱۲)، بهبود دریافت استیکر از کیبورد و ابزار عیب‌یابی برای مدیر.';
+const APPV='26.11.8.21.47';
+const APPN='تغییرات این نسخه: وقتی اندروید برنامه را هنگام ارسال استیکر کیبورد دوباره باز می‌کند، چت قبلی خودکار باز می‌شود و پنل استیکر خود رادچت نمایش داده می‌شود؛ گزارش عیب‌یابی کیبورد کامل‌تر شد.';
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -2256,6 +2256,17 @@ function ssTog(){
 
 bdg();
 boot();
+/* وقتی برنامه دوباره باز می‌شود (مثلاً هنگام ارسال استیکر کیبورد، اندروید برنامه را دوباره اجرا می‌کند و استیکر به صفحه نمی‌رسد)، چتی که باز بود دوباره باز می‌شود */
+{const sv2=()=>{try{L.rst=JSON.stringify({c:cur||'',t:Date.now(),k:document.activeElement&&document.activeElement.id=='in'?1:0})}catch{}};
+ document.addEventListener('visibilitychange',()=>{document.visibilityState=='hidden'&&sv2()});
+ addEventListener('pagehide',sv2);
+ let r=null;try{r=JSON.parse(L.rst||'null')}catch{}
+ try{L.removeItem('rst')}catch{}
+ const dt=r?Date.now()-r.t:1e9;
+ try{kbLog('load nav='+((performance.getEntriesByType('navigation')[0]||{}).type||'?')+' dt='+(r?dt:'-')+' url='+location.href.slice(0,140)+' ref='+String(document.referrer).slice(0,80)+' hist='+history.length+' kb='+(r?r.k:'-'))}catch{}
+ if(r&&r.c&&dt<45000){let n=0;const iv=setInterval(()=>{n++;if(n>30||cur){clearInterval(iv);return}
+   if(me&&me.ph&&C[r.c]&&$('#ls.on')){clearInterval(iv);try{openChat(r.c);
+     if(dt<6000&&r.k){toast('استیکر کیبورد در این APK دریافت نمی‌شود؛ از دکمهٔ استیکر خود رادچت استفاده کنید',4500);setTimeout(()=>{const p=$('#stp');p&&!p.classList.contains('on')&&stk()},600)}}catch{}}},300)}}
 </script>
 </body>
 </html>
