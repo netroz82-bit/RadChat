@@ -59,7 +59,7 @@ header .logo{width:36px;height:36px;margin:0;flex:none}
 #md #dn{background:#e3e8ee;color:#333}
 .a{overflow:hidden}.a img{width:100%;height:100%;object-fit:cover;margin:0;border-radius:0}
 .nb{display:none;background:#e53935;color:#fff;text-align:center;font-size:13px;padding:3px 8px;flex:none}
-.tk{color:#7d8b96}.tk.rd{color:#1e88e5;font-weight:700}
+.tk{color:#5ab8f0;display:inline-block;vertical-align:-1px}.tk.rd{color:#16a34a}.tk path{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .b audio{display:block;width:220px;max-width:100%;height:40px}
 #dl{display:none;margin-top:8px;font-size:14px}
 #cv{position:fixed;inset:0;background:#111;z-index:18;display:none;align-items:center;justify-content:center;color:#fff}
@@ -84,7 +84,7 @@ header .logo{width:36px;height:36px;margin:0;flex:none}
 .dk,.dk .s{background:#121b22;color:#e8edf0}.dk header{background:#1d3557}.dk .fb{background:#1a252d}
 .dk .fb input,.dk #in,.dk #sn{background:#25323b;color:#e8edf0;border-color:#33434d}.dk .c{border-color:#222d35}
 .dk #ms{background:linear-gradient(#0f1a1f,#16232a)}.dk .th{background:#25323b;color:#e8edf0}.dk .me{background:#1f4d8f;color:#fff}
-.dk .b i{color:#aab8c2}.dk .tk{color:#9ab}.dk .tk.rd{color:#5cc8ff}.dk .in{background:#1a252d;border-color:#2a3841}
+.dk .b i{color:#aab8c2}.dk .tk{color:#8fd8ff}.dk .tk.rd{color:#4ade80}.dk .in{background:#1a252d;border-color:#2a3841}
 .dk #md>div{background:#1f2b33;color:#e8edf0}.dk #md #dn{background:#33434d;color:#e8edf0}.dk #wt{background:#16232a;color:#cdd}
 .b{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:pan-y}
 .b img{max-width:220px;max-height:220px;object-fit:cover;cursor:pointer}.b a{color:inherit;text-decoration:underline}
@@ -240,6 +240,14 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 #sdl{background:#e5484d!important;color:#fff!important;border-radius:50%}
 #v{background:#000;z-index:30}#v img,#vv{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain}
 #v.fs #vi{width:auto!important;height:auto!important;object-fit:none}
+.b.md,.dk .b.md,.b.md.me,.b.md.th,.dk .b.md.me,.dk .b.md.th{background:none!important;box-shadow:none!important;border-radius:0!important;padding:0!important;max-width:none;color:inherit}
+.b.md img{display:block;max-width:240px;max-height:320px;margin:0;border-radius:16px;object-fit:cover}
+.b.md .vd video{display:block;width:240px;max-width:100%;max-height:320px;border-radius:16px}
+.b.md i,.dk .b.md i{position:absolute;left:8px;bottom:8px;margin:0;padding:1px 8px;border-radius:10px;background:#0000008c;color:#fff;font-size:10px;line-height:1.7;display:block;pointer-events:none}
+.b.md i .tk{color:#8fd8ff}.b.md i .tk.rd{color:#4ade80}
+@keyframes vslR{from{transform:translateX(48px);opacity:.3}to{transform:none;opacity:1}}
+@keyframes vslL{from{transform:translateX(-48px);opacity:.3}to{transform:none;opacity:1}}
+#vc{position:fixed;top:calc(18px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);background:#0009;color:#fff;border-radius:14px;padding:3px 12px;font-size:13px;z-index:31;display:none;pointer-events:none}#v.fs #vc{display:none}
 #adh{position:fixed;left:8px;right:8px;bottom:calc(70px + env(safe-area-inset-bottom));max-height:58vh;overflow:auto;z-index:24;display:none;background:#fff;color:#1b2a33;border-radius:16px;box-shadow:0 4px 24px #0005;padding:8px}.dk #adh{background:#1f2b33;color:#e8edf0}#adh summary{font-weight:700;padding:8px 6px;cursor:pointer}#adh .it{display:block;width:100%;text-align:right;background:transparent;border:0;border-top:1px solid #8883;padding:10px 6px;color:inherit;font:inherit;border-radius:0}#adh .it b{display:block;font-size:15px;text-align:left}#adh .it small{display:block;opacity:.72;margin-top:2px;line-height:1.7}#adh .xx{display:block;margin:6px auto 0;border:0;background:#8883;color:inherit;border-radius:10px;padding:6px 18px}
 #vd{position:fixed;top:calc(10px + env(safe-area-inset-top));left:12px;width:40px;height:40px;border:0;border-radius:50%;background:#0009;color:#fff;font-size:20px;z-index:31}#v.fs #vd{display:none}
 #vx{position:fixed;top:calc(10px + env(safe-area-inset-top));right:12px;width:40px;height:40px;border:0;border-radius:50%;background:#0009;color:#fff;font-size:20px;z-index:31}
@@ -311,7 +319,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 .b.sk{position:relative;max-width:none}
 .b.sk img{max-width:172px;max-height:172px;width:auto;height:auto;border-radius:0!important;margin:0!important;background:none!important;object-fit:contain}
 .b.sk i,.dk .b.sk i{position:absolute;left:6px;bottom:6px;margin:0;padding:1px 8px;border-radius:10px;background:#0000006b;color:#fff;font-size:10px;line-height:1.7;display:block;pointer-events:none}
-.b.sk i .tk{color:#fff}.b.sk i .tk.rd{color:#7fd6ff}
+.b.sk i .tk{color:#8fd8ff}.b.sk i .tk.rd{color:#4ade80}
 .b.sk .q{margin-bottom:4px}
 #spz img{background:none!important;padding:0!important;border-radius:0!important}
 #lpv .lc{background:none!important;box-shadow:none!important}
@@ -430,7 +438,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 <input type="file" id="fbg" accept="image/*" hidden>
 <div id="mn"></div>
 <div id="cv"><video id="rv" autoplay playsinline></video><video id="lv" autoplay playsinline muted></video><div id="cn"><b id="cnm"></b><span id="cst"></span></div><div id="cb"><button id="mt" onclick="mute()">🎙</button><button id="cf" onclick="flip()"></button><button id="sk" onclick="spk(!CA.sp)">🔈</button><button id="en" onclick="endCall(1)">📵</button></div></div>
-<div id="v" onclick="history.back()"><img id="vi" onclick="event.stopPropagation();$('#v').classList.toggle('fs')"><video id="vv" controls playsinline onclick="event.stopPropagation()" style="display:none;max-width:100%;max-height:100%"></video><button id="vx" onclick="event.stopPropagation();history.back()">✕</button><button id="vd" onclick="event.stopPropagation();vSave()" aria-label="ذخیره">⬇</button></div>
+<div id="v" onclick="vBg()"><img id="vi" onclick="event.stopPropagation();vZm()"><video id="vv" controls playsinline onclick="event.stopPropagation()" style="display:none;max-width:100%;max-height:100%"></video><button id="vx" onclick="event.stopPropagation();history.back()">✕</button><button id="vd" onclick="event.stopPropagation();vSave()" aria-label="ذخیره">⬇</button><div id="vc"></div></div>
 <div id="md"><div><img id="dpi" alt=""><h3 id="dt"></h3><p id="db"></p><div id="dpw" style="display:none"><input id="dpv" type="password" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="رمز شخصی"><span id="dpe" class="ey">👁</span><p id="dpr"></p></div><label id="dl"><input type="checkbox" id="dc"> <span id="dls"></span></label><button id="dy"></button><button id="dn"></button></div></div>
 <script>
 const $=s=>document.querySelector(s),L=localStorage,N=window.Notification;
@@ -443,8 +451,8 @@ const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
    مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
    این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود.
    APPN هم شرح کوتاه همین آپدیت است و به‌صورت خودکار به زنگولهٔ همهٔ کاربران ارسال می‌شود؛ در هر آپدیت آن را هم به‌روز کن. */
-const APPV='26.11.8.21.47';
-const APPN='تغییرات این نسخه: وقتی اندروید برنامه را هنگام ارسال استیکر کیبورد دوباره باز می‌کند، چت قبلی خودکار باز می‌شود و پنل استیکر خود رادچت نمایش داده می‌شود؛ گزارش عیب‌یابی کیبورد کامل‌تر شد.';
+const APPV='26.11.14.19.51';
+const APPN='تغییرات این نسخه: تیک‌های جدید (یک تیک آبی کم‌رنگ برای ارسال و دو تیک سبز روی هم برای خوانده‌شدن)، مرور عکس و ویدیوهای چت با کشیدن انگشت به چپ و راست، عکس و ویدیو بدون قاب در چت و بهبود دریافت پیام در پس‌زمینه.';
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -569,6 +577,7 @@ document.addEventListener('click',()=>N&&N.permission=='default'&&N.requestPermi
 function add(u,m,unread){const c=C[u];if(m.k!='t'&&m.x){mput(m.id,m.x);if(m.x instanceof Blob){BL[m.id]=m.x;MC[m.id]=URL.createObjectURL(m.x)}else MC[m.id]=m.x;m.x=''}c.m.push(m);c.ts=m.ts;if(unread)c.un++;sv();draw();cur==u&&(FC=1,view(),bot(),setTimeout(bot,80),setTimeout(bot,300));m.syn||!m.me||mirror(u,m)}
 
 /* صفحه‌ها */
+const TK1='<svg class="tk" viewBox="0 0 12 12" width="12" height="12"><path d="M1.5 6.5l3 3 6-7"/></svg>',TK2='<svg class="tk rd" viewBox="0 0 17 12" width="17" height="12"><path d="M1.5 6.5l3 3 6-7M6 6.5l3 3 6-7"/></svg>';
 function draw(){
   hpUp();nwUi();const l=srF(Object.keys(C).filter(u=>!C[u].closed&&!nwLk(u)).sort((a,b)=>(C[b].ts||0)-(C[a].ts||0)));
   $('#cl').innerHTML=l.map(u=>{const c=C[u],m=c.m[c.m.length-1];
@@ -580,14 +589,14 @@ function view(){selPrune();
   $('#ct').innerHTML=esc(ch.n)+`<small>${ch.sv?'فقط برای شما':(lsS(ch.pk))}</small>`;$('#ca').innerHTML=ch.sv?svAv('c'):av(cur,ch.n,ch.a);$('#ca').onclick=ch.sv?openPr:null;$('#ct').onclick=openPr;
   ms.style.display=w?'none':'flex';$('.in').style.display=w?'none':'flex';$('#wt').style.display=w?'flex':'none';
   if(w)return $('#wt').innerHTML=ch.host?`<p>کد این چت</p><b>${cur}</b><p>این کد را به مخاطب بدهید تا در رادچت وارد کند. بعد از ورود او، از شما تأیید می‌گیرد.</p><button onclick="copyCode()">کپی کد</button>`:'<p>در انتظار تأیید مخاطب…</p>';
-  const atb=ms.scrollHeight-ms.scrollTop-ms.clientHeight<120;ms.innerHTML=ch.m.map((m,i)=>`<div class="b ${m.me?'me':'th'}${m.st?' sk':''}${SEL.has(m.id)?' sel':''}" data-i="${i}">${m.rp?qt(m.rp):''}${anOk(m)?anHtml(m,i):m.k=='i'?`<img src="${MC[m.id]||m.x||''}" onload="STICK&&bot()" ${m.st?(m.sp?`onclick="event.stopPropagation();spPeek(${i})"`:''):'onclick="event.stopPropagation();zoom(this.src)"'}>`:m.k=='a'?`<div class="vp" data-a="${esc(m.id)}" data-d="${m.dr||0}"><button class="pb">${ic('play')}</button><div class="bar"><div class="fl"></div></div><span class="du"></span></div>`:m.k=='v'?`<div class="vd" data-v="${esc(m.id)}"><video src="${MC[m.id]||''}#t=0.1" preload="metadata" muted playsinline onloadedmetadata="STICK&&bot()"></video><b>${ic('play')}</b></div>`:m.k=='f'?`<div class="fi2" data-f="${esc(m.id)}">${ic('file')}<span>${esc(m.nm||'فایل')}<small>${fmz(m.sz)}</small></span></div>`:lk(m.x)}${pg(m)}<i>${tm(m.ts)}${m.me&&!ch.sv?(m.s==2?' <span class="tk rd">✓✓</span>':m.s?' <span class="tk">✓</span>':' 🕓'):''}</i></div>`).join('');
+  const atb=ms.scrollHeight-ms.scrollTop-ms.clientHeight<120;ms.innerHTML=ch.m.map((m,i)=>`<div class="b ${m.me?'me':'th'}${m.st?' sk':''}${(!m.st&&!m.rp&&((m.k=='i'&&!anOk(m))||m.k=='v'))?' md':''}${SEL.has(m.id)?' sel':''}" data-i="${i}">${m.rp?qt(m.rp):''}${anOk(m)?anHtml(m,i):m.k=='i'?`<img src="${MC[m.id]||m.x||''}" onload="STICK&&bot()" ${m.st?(m.sp?`onclick="event.stopPropagation();spPeek(${i})"`:''):`onclick="event.stopPropagation();zoomM('${esc(m.id)}')"`}>`:m.k=='a'?`<div class="vp" data-a="${esc(m.id)}" data-d="${m.dr||0}"><button class="pb">${ic('play')}</button><div class="bar"><div class="fl"></div></div><span class="du"></span></div>`:m.k=='v'?`<div class="vd" data-v="${esc(m.id)}"><video src="${MC[m.id]||''}#t=0.1" preload="metadata" muted playsinline onloadedmetadata="STICK&&bot()"></video><b>${ic('play')}</b></div>`:m.k=='f'?`<div class="fi2" data-f="${esc(m.id)}">${ic('file')}<span>${esc(m.nm||'فایل')}<small>${fmz(m.sz)}</small></span></div>`:lk(m.x)}${pg(m)}<i>${tm(m.ts)}${m.me&&!ch.sv?(m.s==2?' '+TK2:m.s?' '+TK1:' 🕓'):''}</i></div>`).join('');
   anMount();if(FC||atb){bot();setTimeout(()=>STICK&&bot(),300)}FC=0;ms.querySelectorAll('.vp').forEach(e=>vp(e.dataset.a));
 }
 function openChat(u){if(nwLk(u))return nwMsg();if(C[u]&&C[u].pk&&BLK().includes(C[u].pk))return dlg('چت قفل است','این مخاطب را مسدود کرده‌اید. برای دسترسی به چت، او را از فهرست مسدودها خارج کنید.');selClear();$('#stp').classList.remove('on');cur=u;C[u].un=0;sv();chUi(u);const f=!document.querySelector('#ch.on');FC=1;view();show('ch');f&&nav();bot();[60,200,500,1000].forEach(t=>setTimeout(()=>cur==u&&bot(),t));ack(u);loadMedia(u)}
 function back0(){selClear();cur=null;$('#fu').value='';SRD=0;draw();show('ls');dirUnsub()}
 function back(){history.state&&history.state.n?history.back():back0()}
-function zoom(s){$('#v').classList.remove('fs');$('#vi').style.display='';$('#vv').style.display='none';$('#vi').src=s;$('#v').style.display='flex';nav();vFs()}
-function zoomV(s){$('#vi').style.display='none';$('#vv').style.display='block';$('#vv').src=s;$('#v').style.display='flex';nav();vFs();$('#vv').play().catch(()=>{})}
+function zoom(s){VG=null;vcHide();$('#v').classList.remove('fs');$('#vi').style.display='';$('#vv').style.display='none';$('#vi').src=s;$('#v').style.display='flex';nav();vFs()}
+function zoomV(s){VG=null;vcHide();$('#vi').style.display='none';$('#vv').style.display='block';$('#vv').src=s;$('#v').style.display='flex';nav();vFs();$('#vv').play().catch(()=>{})}
 function copyCode(){(navigator.clipboard?navigator.clipboard.writeText(cur):Promise.reject()).then(()=>dlg('','کد کپی شد'),()=>dlg('','کد را یادداشت کنید: '+cur))}
 async function closeChat(){
   const ch=C[cur],c=cur;
@@ -740,7 +749,7 @@ function menu(b,i){const m=C[cur].m[i];if(!m)return;if(SEL.size){Date.now()-SELT
 function gt(id){const i=C[cur].m.findIndex(m=>m.id==id),e=$(`#ms [data-i="${i}"]`);if(!e)return dlg('','پیام اصلی حذف شده است');e.scrollIntoView({block:'center',behavior:'smooth'});e.style.outline='2px solid #2b63c9';setTimeout(()=>e.style.outline='',1200)}
 document.addEventListener('click',()=>{if(Date.now()-MT>400){$('#mn').style.display='none';SEL.size&&!SELM&&selClear()}});
 {const ms=$('#ms');
-ms.onclick=e=>{const T=z=>e.target.closest(z),q=T('.q'),p=T('.vp'),d=T('.vd'),f=T('.fi2'),x=T('.cx');x?cxl(x.dataset.x):q?gt(q.dataset.r):p?pl(p.dataset.a):f?dl(f.dataset.f):d&&MC[d.dataset.v]&&zoomV(MC[d.dataset.v])};
+ms.onclick=e=>{const T=z=>e.target.closest(z),q=T('.q'),p=T('.vp'),d=T('.vd'),f=T('.fi2'),x=T('.cx');x?cxl(x.dataset.x):q?gt(q.dataset.r):p?pl(p.dataset.a):f?dl(f.dataset.f):d&&MC[d.dataset.v]&&zoomM(d.dataset.v)};
 ms.oncontextmenu=e=>{e.preventDefault();const b=e.target.closest('.b');b&&menu(b,+b.dataset.i)};
 ms.onscroll=()=>{STICK=ms.scrollHeight-ms.scrollTop-ms.clientHeight<120;$('#gb').style.display=ms.scrollHeight-ms.scrollTop-ms.clientHeight>200?'block':'none'};
 ms.ontouchstart=e=>{const b=e.target.closest('.b');if(!b||e.target.tagName=='AUDIO')return;const t=e.touches[0];TS={b,x:t.clientX,y:t.clientY,dx:0,t:setTimeout(()=>{TS&&(TS.l=1,menu(b,+b.dataset.i))},450)}};
@@ -754,7 +763,7 @@ function pl(id){const s=MC[id];if(!s)return;if(AU&&AU.id==id){AU.a.paused?AU.a.p
 function vp(id){document.querySelectorAll('.vp').forEach(e=>{if(e.dataset.a!=id)return;const a=AU&&AU.id==id?AU.a:0,d=+e.dataset.d||(a&&isFinite(a.duration)?a.duration:0);
   e.querySelector('.pb').innerHTML=ic(a&&!a.paused?'pause':'play');e.querySelector('.fl').style.width=a&&d?Math.min(100,a.currentTime/d*100)+'%':'0';e.querySelector('.du').textContent=fm(a&&!a.paused?a.currentTime:d)})}
 history.replaceState({r:1},'');
-addEventListener('popstate',()=>{if(spHide())return;{const np=$('#ntp'),ad=$('#adl');if(np&&np.style.display=='flex'){ntClose();return}if(ad&&ad.style.display=='flex'){ad.style.display='none';return}}{const mn=$('#mn');if((mn&&mn.style.display=='block')||SEL.size){mn&&(mn.style.display='none');SEL.size&&selClear();nav();return}}const v=$('#v');if(v.style.display=='flex'){v.style.display='none';document.fullscreenElement&&document.exitFullscreen().catch(()=>{});$('#vv').pause();return}
+addEventListener('popstate',()=>{if(spHide())return;{const np=$('#ntp'),ad=$('#adl');if(np&&np.style.display=='flex'){ntClose();return}if(ad&&ad.style.display=='flex'){ad.style.display='none';return}}{const mn=$('#mn');if((mn&&mn.style.display=='block')||SEL.size){mn&&(mn.style.display='none');SEL.size&&selClear();nav();return}}const v=$('#v');if(v.style.display=='flex'){v.style.display='none';VG=null;document.fullscreenElement&&document.exitFullscreen().catch(()=>{});$('#vv').pause();return}
   if(CA)return nav();const s=document.querySelector('.s.on');s&&(s.id=='pr'?show('ch'):(s.id=='ch'||s.id=='se'||s.id=='dr')&&back0())});
 /* آیکون‌ها، چرخش دوربین، ارسال مجدد */
 const IC={send:'M2.01 21L23 12 2.01 3 2 10l15 2-15 2z',mic:'M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z',
@@ -2254,6 +2263,35 @@ function ssTog(){
   b.style.display=o?'block':'none';$('#ssb').textContent=(o?'▴':'▾')+' دستگاه‌های فعال';
   if(o){dirPub();ssDraw();CL.forEach(c=>c.connected&&ssSub(c))}}
 
+/* ===== نمایشگر مدیا: با کشیدن انگشت به چپ و راست، عکس/ویدیوی بعدی یا قبلیِ همان فرستنده (خودم یا مخاطب) نمایش داده می‌شود ===== */
+var VG=null,VSW=0;
+function vcHide(){const c=$('#vc');c&&(c.style.display='none')}
+function vgList(id){const ch=C[cur];if(!ch)return null;const t=ch.m.find(m=>m.id==id);if(!t)return null;const mine=!!t.me;
+  const l=ch.m.filter(m=>!!m.me==mine&&!m.st&&!anOk(m)&&(m.k=='i'||m.k=='v')).map(m=>({id:m.id,k:m.k,src:MC[m.id]||m.x||''})).filter(o=>o.src&&typeof o.src=='string');
+  const i=l.findIndex(o=>o.id==id);return i<0?null:{l,i}}
+function zoomM(id){const g=vgList(id);
+  if(!g){const m=C[cur]&&C[cur].m.find(x=>x.id==id),sr=m&&(MC[m.id]||m.x);return sr?(m.k=='v'?zoomV(sr):zoom(sr)):0}
+  VG=g;vShow(0);$('#v').style.display='flex';nav();vFs()}
+function vShow(dir){const g=VG;if(!g)return;const o=g.l[g.i],vi=$('#vi'),vv=$('#vv');$('#v').classList.remove('fs');
+  if(o.k=='v'){vi.style.display='none';vv.style.display='block';vv.src=o.src;vv.play().catch(()=>{})}
+  else{try{vv.pause()}catch{}vv.removeAttribute('src');vv.style.display='none';vi.style.display='';vi.src=o.src}
+  const c=$('#vc');if(c){const n=g.l.length>1;c.textContent=n?fd(g.i+1)+' / '+fd(g.l.length):'';c.style.display=n?'block':'none'}
+  if(dir){const e=o.k=='v'?vv:vi;e.style.animation='none';void e.offsetWidth;e.style.animation=(dir>0?'vslR':'vslL')+' .22s ease-out'}}
+function vBg(){if(Date.now()-VSW<450)return;history.back()}
+function vZm(){if(Date.now()-VSW<450)return;$('#v').classList.toggle('fs')}
+{const v=$('#v');let sx=0,sy=0,st=0,on=0,ok=0;
+ v.addEventListener('touchstart',e=>{if(!VG||e.touches.length!=1){on=0;return}const t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();on=1;
+   ok=!(VG.l[VG.i].k=='v'&&t.clientY>innerHeight-110)&&!v.classList.contains('fs')},{passive:true});
+ v.addEventListener('touchend',e=>{if(!on||!VG||!ok)return;on=0;const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+   if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4&&Date.now()-st<900){VSW=Date.now();const g=VG,n=g.i+(dx<0?1:-1);if(n<0||n>=g.l.length)return;g.i=n;vShow(dx<0?1:-1)}},{passive:true})}
+
+/* ===== دریافت پیام وقتی برنامه در پس‌زمینه است (زیر برنامه‌های دیگر) ===== */
+/* قفل مرورگر جلوی «فریز» شدن صفحه را می‌گیرد و هنگام بازگشت/اتصال دوباره، اتصال‌ها فوراً برقرار می‌شوند؛ پیام‌های دریافت‌نشده از سرور گرفته می‌شود */
+try{navigator.locks&&navigator.locks.request&&navigator.locks.request('radchat-live',{mode:'shared'},()=>new Promise(()=>{}))}catch{}
+const reconnAll=()=>{try{(CL||[]).forEach(c=>{if(c&&!c.connected&&typeof c.reconnect=='function')c.reconnect()})}catch{}};
+['online','pageshow','focus','resume'].forEach(n=>addEventListener(n,reconnAll));
+document.addEventListener('visibilitychange',()=>document.visibilityState=='visible'&&reconnAll());
+setInterval(()=>{if(me&&me.ph&&!ready)reconnAll()},15000);
 bdg();
 boot();
 /* وقتی برنامه دوباره باز می‌شود (مثلاً هنگام ارسال استیکر کیبورد، اندروید برنامه را دوباره اجرا می‌کند و استیکر به صفحه نمی‌رسد)، چتی که باز بود دوباره باز می‌شود */
