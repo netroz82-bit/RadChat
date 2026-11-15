@@ -5,7 +5,23 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2b63c9">
 <link rel="manifest" href="manifest.webmanifest">
-<script src="https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js"></script>
+<script>
+/* بارگذاری کتابخانهٔ اتصال (MQTT): اول از حافظهٔ پنهان، وگرنه هم‌زمان از چند منبع؛ اولین پاسخ سالم استفاده و ذخیره می‌شود */
+window.__mqLoad=function(){
+ const U=['https://cdn.jsdelivr.net/npm/mqtt@5.10.1/dist/mqtt.min.js','https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js','https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.10.1/mqtt.min.js'];
+ const run=t=>{try{(0,eval)(t);return typeof window.mqtt!='undefined'}catch(e){return false}};
+ const tag=u=>new Promise((ok,no)=>{const x=document.createElement('script');x.src=u;x.onload=()=>typeof window.mqtt!='undefined'?ok():no();x.onerror=no;setTimeout(no,30000);document.head.append(x)});
+ return (async()=>{
+  if(typeof window.mqtt!='undefined')return 1;
+  let cache=null;try{cache=await caches.open('rc-lib')}catch(e){}
+  if(cache){for(const u of U){try{const r=await cache.match(u);if(r&&run(await r.text()))return 1}catch(e){}}}
+  const got=await new Promise(res=>{let n=0,done=0;U.forEach(u=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),30000);
+    fetch(u,{signal:c.signal}).then(async r=>{if(!r.ok)throw 0;const tx=await r.text();if(tx.length<1e5)throw 0;return{u,tx}}).then(o=>{if(!done){done=1;res(o)}}).catch(()=>{}).finally(()=>{clearTimeout(t);if(++n==U.length&&!done)res(null)})})});
+  if(got&&run(got.tx)){try{cache&&cache.put(got.u,new Response(got.tx,{headers:{'Content-Type':'application/javascript'}}))}catch(e){}return 1}
+  for(const u of U){try{await tag(u);return 1}catch(e){}}
+  return 0})()};
+window.__mqp=window.__mqLoad();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
 <title>رادچت | RadChat</title>
 <style>
@@ -171,7 +187,7 @@ header button{width:42px;height:42px;border-radius:50%;border:0;background:#ffff
 #stp{display:none;flex:none;height:min(300px,42vh);flex-direction:column;border-top:1px solid #0001}#stp.on{display:flex}
 #stt{display:flex;gap:6px;padding:6px 8px;overflow-x:auto;flex:none}
 #stt button{width:44px;height:44px;border-radius:50%;border:0;background:#0001;flex:none;padding:6px;color:#7d8b96;font-size:20px}#stt button.on{box-shadow:0 0 0 2px #2a9fd4}#stt img{width:100%;height:100%}
-#stg{flex:1;overflow-y:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px;align-content:start}#stg img{width:100%;aspect-ratio:1;object-fit:contain}
+#stg{flex:1;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:8px;align-content:start;box-sizing:border-box;width:100%;max-width:100%}#stg>*{min-width:0;max-width:100%}#stg .si{min-width:0;min-height:0;overflow:hidden}#stg .si svg{width:100%!important;height:100%!important}#stp{max-width:100vw;overflow:hidden}#stg img{width:100%;aspect-ratio:1;object-fit:contain}
 #stg .ad{aspect-ratio:1;border:2px dashed #7d8b96;border-radius:14px;background:none;font-size:30px;color:#7d8b96}
 .in.rec #stb{display:none}
 #sb .tt{width:96px;height:76px;border-radius:14px;padding:6px;position:relative;display:flex;align-items:flex-end;justify-content:center;font-size:11px;line-height:1.3;font-weight:400;box-shadow:inset 0 0 0 1px #0003;border:3px solid transparent}#sb .tt.on{border-color:#2a9fd4}
@@ -458,8 +474,8 @@ const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
    مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
    این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود.
    APPN هم شرح کوتاه همین آپدیت است و به‌صورت خودکار به زنگولهٔ همهٔ کاربران ارسال می‌شود؛ در هر آپدیت آن را هم به‌روز کن. */
-const APPV='26.11.15.15.11';
-const APPN='تغییرات این نسخه: منوی سه‌نقطه در نمایشگر عکس و ویدیو (دانلود و ارسال)، بستهٔ «شکلک» با ایموجی‌های متحرک نوتوی گوگل، اعلان به‌روزرسانی فقط در زنگوله و حذف اعلان‌های قدیمی به‌روزرسانی.';
+const APPV='26.11.15.20.34';
+const APPN='تغییرات این نسخه: رفع کندی و قطع‌وصل شدن‌های مکرر اتصال به سرور (بارگذاری سریع‌تر کتابخانهٔ اتصال، جلوگیری از رقابت دو نمونهٔ برنامه و تلاش دوبارهٔ هوشمند) و جلوگیری از اسکرول افقی بستهٔ استیکر متحرک.';
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -500,12 +516,12 @@ async function boot(){
 
 /* اتصال به دو سرور رایگان عمومی (MQTT) */
 function conn(){
-  if(typeof mqtt=='undefined'){$('#st').textContent='در حال اتصال…';const x=document.createElement('script');x.src=document.scripts[0].src;x.onload=conn;x.onerror=()=>setTimeout(conn,5000);return void document.head.append(x)}
-  const st=()=>{const w=ready;ready=CL.some(c=>c.connected);$('#st').textContent=ready?'متصل':'در حال اتصال…';document.querySelectorAll('.nb').forEach(e=>e.style.display=ready?'none':'block');ready&&!w&&setTimeout(()=>flush(1),300)};
+  if(typeof mqtt=='undefined'){$('#st').textContent='در حال اتصال…';(window.__mqp||Promise.resolve(0)).then(()=>{if(typeof mqtt!='undefined')return conn();window.__mqp=window.__mqLoad?window.__mqLoad():Promise.resolve(0);setTimeout(conn,3000)});return}
+  const st=()=>{const w=ready;ready=CL.some(c=>c.connected);$('#st').textContent=ready?'متصل':'در حال اتصال…';clearTimeout(window._nbt);if(ready)document.querySelectorAll('.nb').forEach(e=>e.style.display='none');else window._nbt=setTimeout(()=>{ready||document.querySelectorAll('.nb').forEach(e=>e.style.display='block')},2500);ready&&!w&&setTimeout(()=>flush(1),300)};
   CL=BR.map(u=>{
-    const c=mqtt.connect(u,{clientId:'rc'+me.id.slice(0,20)+(L.dvid||(L.dvid=Math.random().toString(36).slice(2,8))),clean:false,reconnectPeriod:3000,connectTimeout:10000});
+    const c=mqtt.connect(u,{clientId:'rc'+me.id.slice(0,20)+(L.dvid||(L.dvid=Math.random().toString(36).slice(2,8))),clean:false,keepalive:25,reconnectPeriod:2500,connectTimeout:30000});c._t0=Date.now();
     c.on('connect',()=>{c.subscribe(T(me.id),{qos:1});for(const k in C)if(C[k].wait&&C[k].host)c.subscribe(P(k),{qos:1});st();dirPub();setTimeout(regPub,1500);ssSub(c);c.subscribe('rc1/ib/'+me.id.slice(0,40)+'/+',{qos:1});isAdm()&&c.subscribe('rc1/u/+',{qos:1});c.subscribe('rc1/ab/'+me.id+'/+',{qos:1});Object.values(C).forEach(x=>x.pk&&c.subscribe('rc1/ls/'+x.pk,{qos:1}))});
-    c.on('close',st);c.on('offline',st);c.on('error',()=>{});
+    c.on('close',()=>{c._off=Date.now();st()});c.on('offline',()=>{c._off=Date.now();st()});c.on('error',()=>{});
     c.on('message',(t,p)=>{if(t.startsWith('rc1/u/'))return void regIn(t,p).catch(()=>{});if(t.startsWith('rc1/lr/'))return void lrIn(t,p).catch(()=>{});if(t.startsWith('rc1/ls/'))return lsIn(t,p);if(t.startsWith('rc1/dir/'))return;if(t.startsWith('rc1/sd/'))return void ssIn2(t,p).catch(()=>{});if(t.startsWith('rc1/rd/'))return void rvIn2(t,p).catch(()=>{});if(t.startsWith('rc1/ss/'))return void ssIn(t,p).catch(()=>{});if(t.startsWith('rc1/rv/'))return void rvIn(t,p).catch(()=>{});try{const d=JSON.parse(new TextDecoder().decode(p));if(t.startsWith('rc1/ib/')&&d&&typeof d=='object'){d.rt=t;return void on(d).catch(()=>{}).then(()=>{d.keep||ibClr(t)})}if(d&&d.t=='sec'&&t==T(me.id))return LRP||(typeof d.d=='string'&&lrSame(d.d))?0:dlg('هشدار امنیتی','کسی تلاش کرد با شماره و رمز شخصی شما در دستگاه دیگری وارد شود. اگر شما نبودید، رمز شخصی را از تنظیمات تغییر دهید.');(t.startsWith('rc1/p/')?onJoin(t.slice(6),d):on(d)).catch(()=>{})}catch{}});
     return c;
   });
@@ -630,7 +646,7 @@ $('#fi').onchange=e=>{const fs=[...e.target.files];e.target.value='';const vd=fs
 /* تنظیمات، تم، تیک، حذف، صدا، تماس */
 const PS=new Set(),FL=new Set(),th=v=>{L.th=v?'dk':'';document.body.classList.toggle('dk',!!v);$('meta[name=theme-color]').content=v?'#1d3557':'#2b63c9'};
 th(L.th=='dk');document.querySelectorAll('.nb').forEach(e=>e.style.display='block');
-addEventListener('online',()=>CL.forEach(c=>c.connected||c.reconnect()));
+addEventListener('online',()=>reconnAll(1));
 const svMe=()=>{L.me=JSON.stringify(me)},sp=()=>{$('#sp').innerHTML=av(1,me.n,me.pic);hpUp()};
 var HPK;function hpUp(){const e=$('#hpf');if(!e||!me)return;const p=me.pic||'',k=p.length+'|'+p.slice(-24)+'|'+me.n;if(k==HPK)return;HPK=k;e.innerHTML=av(1,me.n,me.pic)}
 const svAv=k=>`<div class="a svl">${ICON.replace('id="g"','id="g'+k+'"').replace('url(#g)','url(#g'+k+')')}</div>`;
@@ -2377,10 +2393,21 @@ function vZm(){if(Date.now()-VSW<450)return;$('#v').classList.toggle('fs')}
 /* ===== دریافت پیام وقتی برنامه در پس‌زمینه است (زیر برنامه‌های دیگر) ===== */
 /* قفل مرورگر جلوی «فریز» شدن صفحه را می‌گیرد و هنگام بازگشت/اتصال دوباره، اتصال‌ها فوراً برقرار می‌شوند؛ پیام‌های دریافت‌نشده از سرور گرفته می‌شود */
 try{navigator.locks&&navigator.locks.request&&navigator.locks.request('radchat-live',{mode:'shared'},()=>new Promise(()=>{}))}catch{}
-const reconnAll=()=>{try{(CL||[]).forEach(c=>{if(c&&!c.connected&&typeof c.reconnect=='function')c.reconnect()})}catch{}};
-['online','pageshow','focus','resume'].forEach(n=>addEventListener(n,reconnAll));
-document.addEventListener('visibilitychange',()=>document.visibilityState=='visible'&&reconnAll());
-setInterval(()=>{if(me&&me.ph&&!ready)reconnAll()},15000);
+/* تلاش دوباره فقط وقتی لازم است: کتابخانه خودش هر چند ثانیه دوباره وصل می‌شود؛ دخالت اجباری تنها وقتی اتصال بیش از ۴۰ ثانیه گیر کرده یا همین الان اینترنت برگشته */
+const reconnAll=now=>{try{if(YLD||!(me&&me.ph))return;const n=Date.now();(CL||[]).forEach(c=>{if(!c||c.connected||c.disconnecting||typeof c.reconnect!='function')return;
+  const off=c._off||c._t0||0;if(n-(c._rt||0)<(now?4000:40000))return;if(!now&&n-off<40000)return;c._rt=n;c.reconnect()})}catch{}};
+document.addEventListener('visibilitychange',()=>document.visibilityState=='visible'&&reconnAll(0));
+setInterval(()=>reconnAll(0),20000);
+/* ===== فقط یک نمونهٔ برنامه هم‌زمان به سرور وصل باشد ===== */
+/* وقتی اندروید برنامه را دوباره اجرا می‌کند (مثلاً هنگام ارسال استیکر کیبورد)، نمونهٔ قبلی در پس‌زمینه می‌ماند و با همان شناسه به سرور وصل می‌شود؛ سرور هر دو را مدام قطع می‌کند. نمونهٔ پنهان اتصالش را رها می‌کند و وقتی دوباره دیده شد، دوباره وصل می‌شود. */
+var YLD=0;const INST=Math.random().toString(36).slice(2,10);
+const claim=()=>{try{L.inst=INST+':'+Date.now()}catch{}};
+const owner=()=>{try{return String(L.inst||'').split(':')[0]}catch{return''}};
+function yieldConn(){if(YLD)return;YLD=1;try{(CL||[]).forEach(c=>{try{c.end(true)}catch{}})}catch{}CL=[];ready=false;try{$('#st').textContent='در حال اتصال…'}catch{}}
+function reclaimConn(){claim();if(!YLD)return;YLD=0;try{conn()}catch{}}
+claim();
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='visible')reclaimConn()});
+setInterval(()=>{if(!me||!me.ph)return;if(owner()==INST)return;if(document.visibilityState=='visible')reclaimConn();else yieldConn()},3000);
 bdg();
 boot();
 /* وقتی برنامه دوباره باز می‌شود (مثلاً هنگام ارسال استیکر کیبورد، اندروید برنامه را دوباره اجرا می‌کند و استیکر به صفحه نمی‌رسد)، چتی که باز بود دوباره باز می‌شود */
