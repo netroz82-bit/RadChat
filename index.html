@@ -187,7 +187,7 @@ header button{width:42px;height:42px;border-radius:50%;border:0;background:#ffff
 #stp{display:none;flex:none;height:min(300px,42vh);flex-direction:column;border-top:1px solid #0001}#stp.on{display:flex}
 #stt{display:flex;gap:6px;padding:6px 8px;overflow-x:auto;flex:none}
 #stt button{width:44px;height:44px;border-radius:50%;border:0;background:#0001;flex:none;padding:6px;color:#7d8b96;font-size:20px}#stt button.on{box-shadow:0 0 0 2px #2a9fd4}#stt img{width:100%;height:100%}
-#stg{flex:1;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:8px;align-content:start;box-sizing:border-box;width:100%;max-width:100%}#stg>*{min-width:0;max-width:100%}#stg .si{min-width:0;min-height:0;overflow:hidden}#stg .si svg{width:100%!important;height:100%!important}#stp{max-width:100vw;overflow:hidden}#stg img{width:100%;aspect-ratio:1;object-fit:contain}
+#stg{flex:1;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:8px;align-content:start;box-sizing:border-box;width:100%;max-width:100%}#stg>*{min-width:0;max-width:100%}#stg .si{min-width:0;clip-path:inset(0 round 12px)}#stg .si>img{display:block}#stg .si svg{width:100%!important;height:100%!important}#stp{max-width:100vw;overflow:hidden}#stg img{width:100%;aspect-ratio:1;object-fit:contain}
 #stg .ad{aspect-ratio:1;border:2px dashed #7d8b96;border-radius:14px;background:none;font-size:30px;color:#7d8b96}
 .in.rec #stb{display:none}
 #sb .tt{width:96px;height:76px;border-radius:14px;padding:6px;position:relative;display:flex;align-items:flex-end;justify-content:center;font-size:11px;line-height:1.3;font-weight:400;box-shadow:inset 0 0 0 1px #0003;border:3px solid transparent}#sb .tt.on{border-color:#2a9fd4}
@@ -352,7 +352,7 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
 #stg .si.live>img{opacity:0}
 /* استیکر داخل چت: بزرگ‌تر و واضح‌تر؛ در تم تاریک پس‌زمینهٔ روشن */
 .b.sk img{max-width:172px;max-height:172px;image-rendering:auto}
-.ans{position:relative;width:172px;height:172px;display:block}
+.ans{position:relative;width:150px;height:150px;display:block}.ans.sm{width:100px;height:100px}
 .ans>*{position:absolute;inset:0;width:100%;height:100%}
 .b .ans>img,.ans>video{max-width:none;max-height:none;object-fit:contain;border-radius:0;margin:0;background:none;display:block}
 .ans>video,.ans .lt{pointer-events:none}
@@ -423,6 +423,8 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
       <label class="rw"><span>چت ذخیره (پیام‌ها و فایل‌های شخصی)</span><input type="checkbox" id="svc" onchange="tsv(this.checked)"></label>
     </div></details>
     <details class="ac" id="skd"><summary class="rw">استیکرها</summary><div class="ab">
+      <div style="width:100%;max-width:320px"><label class="rw"><span>اندازهٔ استیکر متحرک هنگام ارسال</span><select id="anz" onchange="L.anz=this.value" style="border:0;background:transparent;color:inherit;font:inherit"><option value="b">بزرگ</option><option value="s">کوچک</option></select></label>
+        <p class="sknote" style="margin-top:6px">اندازهٔ نمایش استیکرهای متحرکی که شما می‌فرستید، برای هر دو طرف چت.</p></div>
       <div id="skl" style="width:100%;max-width:320px"></div>
       <button id="skr" onclick="skRestore()" style="display:none">بازگرداندن بسته‌های حذف‌شده</button>
       <h3>افزودن بستهٔ استیکر تلگرام</h3>
@@ -474,8 +476,8 @@ const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
    مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
    این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود.
    APPN هم شرح کوتاه همین آپدیت است و به‌صورت خودکار به زنگولهٔ همهٔ کاربران ارسال می‌شود؛ در هر آپدیت آن را هم به‌روز کن. */
-const APPV='26.11.15.20.34';
-const APPN='تغییرات این نسخه: رفع کندی و قطع‌وصل شدن‌های مکرر اتصال به سرور (بارگذاری سریع‌تر کتابخانهٔ اتصال، جلوگیری از رقابت دو نمونهٔ برنامه و تلاش دوبارهٔ هوشمند) و جلوگیری از اسکرول افقی بستهٔ استیکر متحرک.';
+const APPV='26.11.16.7.45';
+const APPN='تغییرات این نسخه: رفع هم‌پوشانی استیکرها در پنل، کوچک‌تر شدن کمی استیکرهای متحرک در چت و گزینهٔ اندازهٔ ارسال استیکر متحرک (بزرگ یا کوچک) در تنظیمات.';
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -586,7 +588,7 @@ function rm(p,ch,id){if(TB.has(id)||ch.m.some(x=>x.id==id))return p.sy?0:dv(ch,p
   if(p.n&&!p.sy)ch.n=String(p.n).slice(0,20);
   const s1=(k=='i'&&p.st)||(p.st&&(p.an=='webm'&&k=='v'||p.an=='tgs'&&k=='f')&&x instanceof Blob&&x.size<15e5),sA=s1&&k!='i'?p.an:0,sT=s1&&k!='i'&&typeof p.th=='string'&&/^data:image\/(webp|png|jpeg);base64,[\w+\/=]{1,40000}$/.test(p.th)?p.th:'';
   const seen=p.sy||cur==p.c&&!document.hidden;
-  add(p.c,{...(p.sy?{me:p.sy==1?1:0,s:p.sy==1?2:0,dl:p.sy==1?1:0,rs:1,syn:1}:{}),id,k,x,st:s1?1:0,sp:s1?vsp(p.sp):0,an:sA,th:sT,rp:vr(p.rp),nm:String(p.nm||'').slice(0,80),sz:+p.sz||0,dr:+p.dr>0&&+p.dr<36000?Math.round(p.dr):0,ts:Math.min(+p.ts||Date.now(),Date.now())},!seen);p.sy?0:(seen&&ack(p.c),dv(ch,p.c,id),sfx(1));
+  add(p.c,{...(p.sy?{me:p.sy==1?1:0,s:p.sy==1?2:0,dl:p.sy==1?1:0,rs:1,syn:1}:{}),id,k,x,st:s1?1:0,sp:s1?vsp(p.sp):0,an:sA,th:sT,zs:sA&&+p.zs==1?1:0,rp:vr(p.rp),nm:String(p.nm||'').slice(0,80),sz:+p.sz||0,dr:+p.dr>0&&+p.dr<36000?Math.round(p.dr):0,ts:Math.min(+p.ts||Date.now(),Date.now())},!seen);p.sy?0:(seen&&ack(p.c),dv(ch,p.c,id),sfx(1));
   if(!seen&&!ch.closed)notify(p.c,s1?'🌟 استیکر':k=='i'?'📷 تصویر':k=='a'?'🎤 پیام صوتی':k=='v'?'🎬 ویدیو':k=='f'?'📎 فایل':x);
 }
 function notify(u,b){
@@ -632,7 +634,7 @@ async function closeChat(){
 async function snd(k,x,dr,st,sp,an,th){
   const c=cur,ch=C[c];if(!c||ch.wait)return;
   if(x instanceof Blob&&x.size<8e7){try{x=new File([await x.arrayBuffer()],x.name||'',{type:x.type})}catch{}}
-  const id=rid(),m={id,me:1,k,x,ts:Date.now(),s:ch.sv?1:0,dr,st,sp,an,th};if(x instanceof Blob){m.nm=x.name||'';m.sz=x.size}else if(typeof x=='string'&&k=='i')m.sz=Math.round(x.length*.75);if(RP){m.rp=RP;rpx()}
+  const id=rid(),m={id,me:1,k,x,ts:Date.now(),s:ch.sv?1:0,dr,st,sp,an,th,...(an&&L.anz=='s'?{zs:1}:{})};if(x instanceof Blob){m.nm=x.name||'';m.sz=x.size}else if(typeof x=='string'&&k=='i')m.sz=Math.round(x.length*.75);if(RP){m.rp=RP;rpx()}
   FC=1;add(c,m);sfx(0);ch.sv||go(ch,c,m)
 }
 function tx(){if(!RC)setTimeout(()=>{const i=$('#in');i&&i.focus()},0);if(RC)return recEnd(1);const i=$('#in'),v=i.value.trim();if(!v)return;i.value='';i.style.height='';snd('t',v)}
@@ -751,7 +753,7 @@ const lk=t=>esc(t).replace(/https?:\/\/[^\s<>"']+/g,u=>`<a href="${u}" target="_
 const qt=r=>`<div class="q" data-r="${esc(r.id)}">${r.th?`<img src="${r.th}">`:''}<span>${esc(r.t)}</span></div>`;
 const vr=r=>r&&typeof r.t=='string'&&typeof r.id=='string'?{id:r.id.slice(0,40),t:r.t.slice(0,80),th:typeof r.th=='string'&&/^data:image\/jpeg;base64,[\w+\/=]{1,12000}$/.test(r.th)?r.th:''}:0;
 async function tr(ch,u,m,only){
-  const b={sy:ch.sy||0,c:u,k:m.k,ts:m.ts,n:me.n,rp:m.rp,dr:m.dr,mid:m.id,nm:m.nm,sz:m.sz,st:m.st,sp:m.sp,an:m.an,th:m.th};
+  const b={sy:ch.sy||0,c:u,k:m.k,ts:m.ts,n:me.n,rp:m.rp,dr:m.dr,mid:m.id,nm:m.nm,sz:m.sz,st:m.st,sp:m.sp,an:m.an,th:m.th,zs:m.zs};
   const run=async(cn,mk)=>{const ol=only?only.filter(j=>j<cn):0,nn=ol?ol.length:cn;let i=0,dn=0,ok=1;ol||(m.pg=0);await Promise.all(Array.from({length:Math.min(10,nn)},async()=>{while(ok&&!m.cx&&i<nn){const j=ol?ol[i++]:i++,d=await mk(j);if(!await post(ch.pk,{...b,t:'ck',i:j,cn,d,mt:(BL[m.id]||{}).type},rid())){ok=0;break}dn++;if(!ol){m.pg=dn/cn;ch.sy||pgs(m.id,m.pg)}}}));return ok&&!m.cx?1:0};
   if(m.k=='v'||m.k=='f'){const f=BL[m.id];if(!f)return 0;const z=72000;return run(Math.max(1,Math.ceil(f.size/z)),j=>new Promise(r=>{const q=new FileReader();q.onload=()=>r(q.result.split(',')[1]);q.readAsDataURL(f.slice(j*z,(j+1)*z))}))}
   const x=m.k=='t'?m.x:MC[m.id]||m.x;if(!x)return 0;
@@ -848,7 +850,7 @@ $('#pa').innerHTML=PAL.map((t,i)=>`<button class="tt" data-i="${i}" style="backg
 
 $('#pa').onclick=e=>{const b=e.target.closest('.tt');if(b){L.tm=b.dataset.i;th2();setSt();clearTimeout(window._tdp);window._tdp=setTimeout(()=>{try{dirPub()}catch{}},3000)}};
 
-function setSt(){renderBk();nwUi();$('#svc').checked=!!C.S;$('#sd2').checked=L.ns!='0';$('#spn').value=me.pn||'';$('#ad').value=L.ad||'0';$('#srt').checked=L.rt!='0';$('#shl').checked=L.hl=='1';$('#sic').checked=L.ic!='0';
+function setSt(){renderBk();nwUi();{const z=$('#anz');z&&(z.value=L.anz=='s'?'s':'b')}$('#svc').checked=!!C.S;$('#sd2').checked=L.ns!='0';$('#spn').value=me.pn||'';$('#ad').value=L.ad||'0';$('#srt').checked=L.rt!='0';$('#shl').checked=L.hl=='1';$('#sic').checked=L.ic!='0';
   document.querySelectorAll('#pa .tt').forEach((b,i)=>b.classList.toggle('on',i==TI()))}
 th2();
 const tone=(f,d=.12,t=0)=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();const o=AC.createOscillator(),g=AC.createGain(),q=AC.currentTime+t;o.frequency.value=f;g.gain.setValueAtTime(.12,q);g.gain.exponentialRampToValueAtTime(.001,q+d);o.connect(g);g.connect(AC.destination);o.start(q);o.stop(q+d)}catch{}};
@@ -902,7 +904,7 @@ function fwo(){const sh=SHF,a=FW||[],ts=[...document.querySelectorAll('#fl input
   if(!ts.length)return fwx();
   const ok=a.map(m=>({m,x:m.k=='t'?m.x:BL[m.id]||MC[m.id]||m.x})).filter(o=>o.x);
   if(!ok.length)return dlg('','فایل هنوز بارگذاری نشده است');
-  let j=0;ts.forEach(u=>{const c=C[u];if(!c)return;ok.forEach(({m,x})=>{const n={id:rid(),me:1,k:m.k,x,ts:Date.now()+(j++),s:c.sv?1:0,dr:m.dr,nm:m.nm,sz:m.sz,st:m.st,sp:m.sp,an:m.an,th:m.th};add(u,n);c.sv||go(c,u,n)})});
+  let j=0;ts.forEach(u=>{const c=C[u];if(!c)return;ok.forEach(({m,x})=>{const n={id:rid(),me:1,k:m.k,x,ts:Date.now()+(j++),s:c.sv?1:0,dr:m.dr,nm:m.nm,sz:m.sz,st:m.st,sp:m.sp,an:m.an,th:m.th,zs:m.zs};add(u,n);c.sv||go(c,u,n)})});
   fwx();sfx(0);selClear();sh&&ts.length==1&&setTimeout(()=>openChat(ts[0]),250);
   ok.length<a.length&&dlg('',fd(a.length-ok.length)+' مورد ارسال نشد چون هنوز بارگذاری نشده بود')}
 {const cl=$('#cl');let t,sx,sy;
@@ -2028,7 +2030,7 @@ async function anLot(host,blob,key){
 
 /* ---------- استیکر متحرک در چت ---------- */
 const anOk=m=>!!(m&&m.st&&(m.k=='v'||m.k=='f')&&(m.an=='webm'||m.an=='tgs'));
-const anHtml=(m,i)=>`<div class="ans" data-an="${esc(m.id)}"${m.sp?` data-sp="${i}"`:''}>${m.th?`<img src="${m.th}" draggable="false">`:'<span class="aph">🌟</span>'}</div>`;
+const anHtml=(m,i)=>`<div class="ans${m.zs?' sm':''}" data-an="${esc(m.id)}"${m.sp?` data-sp="${i}"`:''}>${m.th?`<img src="${m.th}" draggable="false">`:'<span class="aph">🌟</span>'}</div>`;
 const ANC=new Map();let ANU='';
 const ANO='IntersectionObserver'in window?new IntersectionObserver(es=>es.forEach(e=>{e.target._v=e.isIntersecting;anSync(e.target)}),{rootMargin:'120px'}):0;
 function anSync(h){
