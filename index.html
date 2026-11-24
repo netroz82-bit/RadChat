@@ -422,6 +422,12 @@ header #hpf{width:42px;height:42px;padding:0;background:none;border-radius:50%;f
       <label class="rw"><span>زنگ تماس</span><input type="checkbox" id="srt" onchange="L.rt=this.checked?'1':'0';this.checked&&ringOnce()"></label>
       <label class="rw"><span>چت ذخیره (پیام‌ها و فایل‌های شخصی)</span><input type="checkbox" id="svc" onchange="tsv(this.checked)"></label>
     </div></details>
+    <details class="ac" id="bgd"><summary class="rw">اعلان و دریافت پیام در پس‌زمینه</summary><div class="ab">
+      <label class="rw"><span>ادامهٔ دریافت پیام وقتی برنامه کوچک شده است</span><input type="checkbox" id="bgs" onchange="bgSet(this.checked)"></label>
+      <label class="rw"><span>بررسی پیام‌ها با برنامهٔ بسته (هر ۱۵ دقیقه)</span><input type="checkbox" id="bgp" onchange="bgSetP(this.checked)"></label>
+      <button onclick="bgBat()" style="margin:8px 0;padding:10px 16px;border:0;border-radius:12px;background:#2a7fd4;color:#fff;font:inherit">مجوز اعلان و معافیت از محدودیت باتری</button>
+      <p class="sknote" id="bgn" style="margin-top:6px"></p>
+    </div></details>
     <details class="ac" id="skd"><summary class="rw">استیکرها</summary><div class="ab">
       <div style="width:100%;max-width:320px"><label class="rw"><span>اندازهٔ استیکر متحرک هنگام ارسال</span><select id="anz" onchange="L.anz=this.value" style="border:0;background:transparent;color:inherit;font:inherit"><option value="b">بزرگ</option><option value="s">کوچک</option></select></label>
         <p class="sknote" style="margin-top:6px">اندازهٔ نمایش استیکرهای متحرکی که شما می‌فرستید، برای هر دو طرف چت.</p></div>
@@ -476,8 +482,10 @@ const EM=[...'🐱🐶🦊🐼🐸🦁🐙🦋🌲🌻🍎🍇🚀⚽🎈⭐'];
    مثال: 26.5.11.16.20  یعنی ۲۰۲۶/۵/۱۱ ساعت ۱۶:۲۰
    این مقدار در پایین صفحهٔ تنظیمات نمایش داده می‌شود و همراه با هر حساب در فضای ابری (رکورد حساب و فهرست دستگاه‌ها) ذخیره می‌شود.
    APPN هم شرح کوتاه همین آپدیت است و به‌صورت خودکار به زنگولهٔ همهٔ کاربران ارسال می‌شود؛ در هر آپدیت آن را هم به‌روز کن. */
-const APPV='26.11.16.7.45';
-const APPN='تغییرات این نسخه: رفع هم‌پوشانی استیکرها در پنل، کوچک‌تر شدن کمی استیکرهای متحرک در چت و گزینهٔ اندازهٔ ارسال استیکر متحرک (بزرگ یا کوچک) در تنظیمات.';
+const APPV='26.11.23.21.33';
+const APPN='تغییرات این نسخه: اعلان واقعی پیام‌های جدید حتی وقتی برنامه کوچک شده یا بسته است (در APK ساخته‌شده با گزینه‌های پس‌زمینه) و بخش «اعلان و دریافت پیام در پس‌زمینه» در تنظیمات.';
+const WB=()=>window.WebToApk||null,AM=()=>window.AppMint||null;
+const BGRUN=(()=>{try{return /[?&]appmint_background=1/.test(location.search)||!!(window.WebToApk&&WebToApk.isBackgroundRun&&WebToApk.isBackgroundRun())}catch(e){return false}})();
 const ICON=`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2fc4b2"/><stop offset="1" stop-color="#2a55d4"/></linearGradient></defs><rect width="100" height="100" rx="24" fill="url(#g)"/><path d="M26 32h40a10 10 0 0 1 10 10v20a10 10 0 0 1-10 10H48L34 84V72h-8a10 10 0 0 1-10-10V42a10 10 0 0 1 10-10z" fill="#fff"/><circle cx="46" cy="49" r="6" fill="#2a55d4"/><rect x="43.5" y="51" width="5" height="12" rx="2.5" fill="#2a55d4"/><path d="M72 22a16 16 0 0 1 10 10M70 10a30 30 0 0 1 20 20" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".9"/></svg>`;
 document.querySelectorAll('.logo').forEach(e=>e.innerHTML=ICON);
 {const l=document.createElement('link');l.rel='icon';l.href='data:image/svg+xml,'+encodeURIComponent(ICON);document.head.append(l)}
@@ -594,6 +602,10 @@ function rm(p,ch,id){if(TB.has(id)||ch.m.some(x=>x.id==id))return p.sy?0:dv(ch,p
 function notify(u,b){
   if(nwLk(u))return;
   navigator.vibrate&&navigator.vibrate(120);
+  /* داخل APK: اعلان واقعی اندروید (فقط وقتی برنامه دیده نمی‌شود یا اجرای پس‌زمینه است) */
+  {const wb=window.WebToApk;if(wb&&typeof wb.notify=='function'){
+    if(BGRUN||document.visibilityState!='visible'){try{wb.notify(JSON.stringify({title:(C[u]&&C[u].n)||'رادچت',body:String(b).slice(0,100),tag:'c'+u}));L.lnt=JSON.stringify({c:u,t:Date.now()})}catch(e){}}
+    return}}
   if(!N||N.permission!='granted')return;
   const o={body:b.slice(0,100),tag:u,vibrate:[150]};
   try{new N(C[u].n,o)}catch{navigator.serviceWorker&&navigator.serviceWorker.getRegistration().then(r=>r&&r.showNotification(C[u].n,o))}
@@ -850,7 +862,7 @@ $('#pa').innerHTML=PAL.map((t,i)=>`<button class="tt" data-i="${i}" style="backg
 
 $('#pa').onclick=e=>{const b=e.target.closest('.tt');if(b){L.tm=b.dataset.i;th2();setSt();clearTimeout(window._tdp);window._tdp=setTimeout(()=>{try{dirPub()}catch{}},3000)}};
 
-function setSt(){renderBk();nwUi();{const z=$('#anz');z&&(z.value=L.anz=='s'?'s':'b')}$('#svc').checked=!!C.S;$('#sd2').checked=L.ns!='0';$('#spn').value=me.pn||'';$('#ad').value=L.ad||'0';$('#srt').checked=L.rt!='0';$('#shl').checked=L.hl=='1';$('#sic').checked=L.ic!='0';
+function setSt(){renderBk();nwUi();bgUi();{const z=$('#anz');z&&(z.value=L.anz=='s'?'s':'b')}$('#svc').checked=!!C.S;$('#sd2').checked=L.ns!='0';$('#spn').value=me.pn||'';$('#ad').value=L.ad||'0';$('#srt').checked=L.rt!='0';$('#shl').checked=L.hl=='1';$('#sic').checked=L.ic!='0';
   document.querySelectorAll('#pa .tt').forEach((b,i)=>b.classList.toggle('on',i==TI()))}
 th2();
 const tone=(f,d=.12,t=0)=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();const o=AC.createOscillator(),g=AC.createGain(),q=AC.currentTime+t;o.frequency.value=f;g.gain.setValueAtTime(.12,q);g.gain.exponentialRampToValueAtTime(.001,q+d);o.connect(g);g.connect(AC.destination);o.start(q);o.stop(q+d)}catch{}};
@@ -1733,7 +1745,7 @@ function admHelp(){let o=$('#adh');if(!o){o=document.createElement('div');o.id='
 function admPut(c){const o=$('#adh');o&&(o.style.display='none');const e=$('#in');if(!e)return;e.textContent=c;e.focus();try{const r=document.createRange();r.selectNodeContents(e);r.collapse(false);const g=getSelection();g.removeAllRanges();g.addRange(r)}catch{}e.dispatchEvent(new Event('input',{bubbles:true}))}
 /* اعلان نسخهٔ جدید: وقتی مدیر نسخهٔ تازه را برای اولین بار باز می‌کند، شمارهٔ نسخه و شرح آپدیت در زنگولهٔ همهٔ کاربران ثبت می‌شود */
 const admUpdTxt=()=>'🆕 رادچت به نسخهٔ '+APPV+' به‌روزرسانی شد.\n'+APPN+'\nبرای استفاده از امکانات جدید، برنامه را به‌روز کنید.';
-setInterval(()=>{try{if(isAdm()&&ready&&L.admv!==APPV){L.admv=APPV;admBroadcast('t',admUpdTxt(),1,1)}}catch{}},30000);
+setInterval(()=>{try{if(!BGRUN&&isAdm()&&ready&&L.admv!==APPV){L.admv=APPV;admBroadcast('t',admUpdTxt(),1,1)}}catch{}},30000);
 function missCall(){const a=CA;if(!a||a.pc)return;const u=a.u,v=a.v,ts=Date.now(),ch=C[u];endCall(1);if(!ch)return;add(u,{id:rid(),me:1,k:'t',x:'📞 تماس '+(v?'تصویری':'صوتی')+' از دست رفته — '+jd(ts,1),ts,s:2,dl:1},false);ch.pk&&post(ch.pk,{c:u,t:'mc',v:v?1:0,ts},rid())}
 {const ms=$('#ms'),d=document.createElement('div');d.id='dtf';document.body.appendChild(d);let t;ms.addEventListener('scroll',()=>{const ch=C[cur];if(!ch)return;const top=ms.getBoundingClientRect().top+6;let m=null;for(const b of ms.querySelectorAll('.b[data-i]')){if(b.getBoundingClientRect().bottom>top){m=ch.m[b.dataset.i];break}}if(!m||!m.ts)return;d.textContent=jd(m.ts);d.classList.add('on');clearTimeout(t);t=setTimeout(()=>d.classList.remove('on'),1400)},{passive:true})}
 ntBadge();
@@ -1865,6 +1877,7 @@ async function spCtl(p,ch,f){const u=p.c,t=p.t,id=p.p;
 /* خروج از حساب کاربری (حساب حذف نمی‌شود؛ با شمارهٔ موبایل و رمز شخصی می‌توان دوباره وارد شد) */
 async function lgo(){
   if(!await dlg('خروج از حساب','با خروج، همهٔ پیام‌ها و فایل‌های این حساب از روی این گوشی پاک می‌شود. برای ورود دوباره به شمارهٔ موبایل و رمز شخصی نیاز دارید. خارج می‌شوید؟','خروج','انصراف'))return;
+  bgStop();try{const a=AM();a&&a.background&&a.background.unregister('rcinbox')}catch(e){}
   try{
     const h=await sh2(me.ph),ad=+L.ad||0,oth=Object.values(SS).some(x=>x.id!=me.id&&Date.now()-x.ts<2592e5)||Object.values(SS2).some(x=>x.sid!=me.sid&&Date.now()-x.ts<2592e5);
     CL.forEach(c=>c.connected&&(c.publish('rc1/ss/'+h+'/'+me.id,'',{qos:1,retain:true}),c.publish('rc1/sd/'+h+'/'+ssSid(),'',{qos:1,retain:true})));
@@ -1973,7 +1986,7 @@ async function ctPub(){try{if(!me||!me.ph||!me.pn||!ready||(me.nw&&me.nw.g&&!me.
   const l=ctList();if(!l.length)return;const sig=l.map(x=>x.i+':'+x.n).sort().join('|');if(L.cts==sig)return;
   const ks=await ksf(),h=await sh2(me.ph),e=await ctEnc(ks,l),pl=JSON.stringify({v:1,ts:Date.now(),...e});let ok=0;
   CL.forEach(c=>{if(c.connected){c.publish('rc1/ct/'+h,pl,{qos:1,retain:true});ok=1}});ok&&(L.cts=sig)}catch{}}
-setTimeout(ctPub,15000);setInterval(ctPub,60000);
+BGRUN||(setTimeout(ctPub,15000),setInterval(ctPub,60000));
 function ctFetch(){return new Promise(async res=>{try{if(typeof mqtt=='undefined')return res(0);const h=await sh2(me.ph),ks=await ksf(),cl=[];let fin=0;
   const end=v=>{if(fin)return;fin=1;cl.forEach(c=>{try{c.end(true)}catch{}});res(v)};
   BR.forEach(u=>{const c=mqtt.connect(u,{clientId:'rt'+Math.random().toString(36).slice(2),reconnectPeriod:0,connectTimeout:8000});cl.push(c);c.on('connect',()=>c.subscribe('rc1/ct/'+h,{qos:1}));c.on('error',()=>{});
@@ -2368,7 +2381,7 @@ async function emoInstall(manual){
     else if(!EMS.e)EMS.e='ایموجی متحرکی دریافت نشد. چند دقیقه بعد دوباره امتحان کنید.'
   }catch(e){EMS.e=e&&e.mem?'حافظهٔ دستگاه برای ذخیرهٔ بستهٔ شکلک کافی نیست.':'دریافت بستهٔ شکلک ناموفق بود.'}
   finally{EMB=0;emoUi()}}
-setTimeout(()=>emoInstall(),20000);setInterval(()=>emoInstall(),6e5);
+setTimeout(()=>BGRUN||emoInstall(),20000);setInterval(()=>BGRUN||emoInstall(),6e5);
 
 /* ===== نمایشگر مدیا: با کشیدن انگشت به چپ و راست، عکس/ویدیوی بعدی یا قبلیِ همان فرستنده (خودم یا مخاطب) نمایش داده می‌شود ===== */
 var VG=null,VSW=0;
@@ -2407,13 +2420,66 @@ const claim=()=>{try{L.inst=INST+':'+Date.now()}catch{}};
 const owner=()=>{try{return String(L.inst||'').split(':')[0]}catch{return''}};
 function yieldConn(){if(YLD)return;YLD=1;try{(CL||[]).forEach(c=>{try{c.end(true)}catch{}})}catch{}CL=[];ready=false;try{$('#st').textContent='در حال اتصال…'}catch{}}
 function reclaimConn(){claim();if(!YLD)return;YLD=0;try{conn()}catch{}}
-claim();
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='visible')reclaimConn()});
-setInterval(()=>{if(!me||!me.ph)return;if(owner()==INST)return;if(document.visibilityState=='visible')reclaimConn();else yieldConn()},3000);
+BGRUN||claim();
+document.addEventListener('visibilitychange',()=>{if(!BGRUN&&document.visibilityState=='visible')reclaimConn()});
+setInterval(()=>{if(BGRUN||!me||!me.ph)return;if(owner()==INST)return;if(document.visibilityState=='visible')reclaimConn();else yieldConn()},3000);
+/* ===== اعلان واقعی و دریافت پیام در پس‌زمینه (APK ساخته‌شده با freewebtoapk.com / AppMint) ===== */
+/* ۱) سرویس پیش‌زمینه: وقتی برنامه کوچک شده یا زیر برنامه‌های دیگر است، صفحه متوقف نمی‌شود و پیام‌ها با اعلان واقعی می‌رسند.
+   ۲) اجرای دوره‌ای صفحه با برنامهٔ بسته (هر ۱۵ دقیقه): پیام‌های جاافتاده گرفته می‌شود و اعلان داده می‌شود. */
+var BGID='',BGDN=0,BGR=0,BGT0=Date.now();
+function bgStart(){try{const b=WB();if(BGRUN||!b||typeof b.startBackgroundService!='function'||!me||!me.ph||L.bgs==='0')return;
+  if(b.isBackgroundServiceRunning&&b.isBackgroundServiceRunning())return;
+  const r=JSON.parse(b.startBackgroundService(JSON.stringify({title:'رادچت',text:'دریافت پیام‌ها فعال است',stopLabel:'توقف'})));L.bge=r&&r.ok?'':String((r&&r.reason)||'?');bgUi()}catch(e){}}
+function bgStop(){try{const b=WB();b&&b.stopBackgroundService&&b.stopBackgroundService()}catch(e){}}
+function bgReg(){try{const a=AM();if(BGRUN||!a||!a.background||!me||!me.ph)return;
+  if(L.bgp==='0'){a.background.unregister('rcinbox').catch(()=>{});return}
+  a.background.list().then(l=>{if((l||[]).some(t=>t.name=='rcinbox'))return;return a.background.register('rcinbox',{intervalMinutes:15,requiresNetwork:true}).then(r=>{L.bgpe=r&&r.ok?'':String((r&&r.reason)||'?');bgUi()})}).catch(()=>{})}catch(e){}}
+function bgSet(on){L.bgs=on?'1':'0';on?bgStart():bgStop();bgUi()}
+function bgSetP(on){L.bgp=on?'1':'0';bgReg();bgUi()}
+async function bgBat(){const b=WB(),a=AM();if(!b)return dlg('','این امکان فقط در برنامهٔ نصب‌شده (APK) کار می‌کند.');
+  try{if(a&&a.enableNotifications)await a.enableNotifications();else b.requestNotificationPermission&&b.requestNotificationPermission()}catch(e){}
+  try{const r=b.requestIgnoreBatteryOptimizations&&b.requestIgnoreBatteryOptimizations();
+    if(r=='already_ignoring')toast('محدودیت باتری از قبل برداشته شده است');
+    else if(r=='settings_opened')await dlg('','در فهرستی که باز شد، «رادچت» را پیدا کنید و روی «بدون محدودیت» (Not optimised) بگذارید.');
+    else if(r=='unavailable')toast('این گوشی چنین تنظیمی ندارد')}catch(e){}
+  bgUi()}
+function bgUi(){const g=$('#bgs'),p=$('#bgp'),n=$('#bgn');if(!g||!p||!n)return;g.checked=L.bgs!=='0';p.checked=L.bgp!=='0';
+  const b=WB();let t='';
+  if(!b)t='این امکانات فقط در برنامهٔ نصب‌شده (APK) کار می‌کنند.';
+  else{
+    if(L.bge==='not_enabled'||L.bge==='type_not_declared')t+='هنگام ساخت APK گزینهٔ «Keep running in the background» روشن نبوده است. ';
+    else if(L.bge)t+='سرویس پس‌زمینه شروع نشد ('+L.bge+'). ';
+    if(L.bgpe==='not_enabled')t+='هنگام ساخت APK گزینهٔ «Run page code while closed» روشن نبوده است. ';
+    else if(L.bgpe)t+='بررسی دوره‌ای فعال نشد ('+L.bgpe+'). '}
+  n.textContent=t||'فعال است. برای اعلان مطمئن‌تر، دکمهٔ بالا را هم بزنید.'}
+function ntOpen(){try{const r=JSON.parse(L.lnt||'null');if(!r||Date.now()-r.t>18e4||cur||!C[r.c]||C[r.c].closed||nwLk(r.c)||!(C[r.c].un>0))return;L.removeItem('lnt');const l=$('#ls');if(l&&l.classList.contains('on'))openChat(r.c)}catch(e){}}
+addEventListener('appmint:background-service',e=>{const d=e.detail||{};if(d.state=='stopped'&&d.reason=='user'){L.bgs='0';bgUi()}else if(d.state=='failed'){L.bge=String(d.reason||'failed');bgUi()}});
+document.addEventListener('click',()=>{if(BGRUN)return;const a=AM();a&&a.getNotificationState&&Promise.resolve(a.getNotificationState()).then(s=>{if(s=='prompt'&&a.enableNotifications)a.enableNotifications()}).catch(()=>{})},{once:true});
+if(!BGRUN){
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState=='visible'){setTimeout(bgStart,600);setTimeout(ntOpen,400)}});
+  setTimeout(bgStart,2500);setTimeout(bgReg,6000);setTimeout(ntOpen,2500);
+  setInterval(()=>{document.visibilityState=='visible'&&bgStart()},30000)}
+/* اجرای پس‌زمینه با برنامهٔ بسته: وصل شو، پیام‌های جاافتاده را بگیر، اعلان بده، تمام */
+function bgFinish(ok,retry){if(BGDN)return;BGDN=1;try{(CL||[]).forEach(c=>{try{c.end(true)}catch(e){}})}catch(e){}
+  try{const a=AM(),b=WB();if(BGID){if(a&&a.background&&a.background.done)a.background.done(BGID,{ok:!!ok,retry:!!retry});else if(b&&b.backgroundDone)b.backgroundDone(BGID,JSON.stringify({ok:!!ok,retry:!!retry}))}}catch(e){}}
+if(BGRUN){
+  try{const m=/[?&]appmint_run=([^&]+)/.exec(location.search);m&&(BGID=decodeURIComponent(m[1]))}catch(e){}
+  addEventListener('appmint:background',e=>{BGID=(e.detail&&e.detail.runId)||BGID});
+  const o0=owner();
+  const iv=setInterval(()=>{
+    if(BGDN)return clearInterval(iv);
+    if(!me||!me.ph){clearInterval(iv);return bgFinish(true)}
+    const b=WB();
+    if(b&&b.isBackgroundServiceRunning&&b.isBackgroundServiceRunning()){clearInterval(iv);return bgFinish(true)}  /* صفحهٔ اصلی خودش زنده است */
+    if(owner()!=o0){clearInterval(iv);return bgFinish(true)}  /* کاربر برنامه را باز کرد */
+    if(ready){BGR=BGR||Date.now();if(Date.now()-BGR>22000){clearInterval(iv);return bgFinish(true)}}
+    if(Date.now()-BGT0>85000){clearInterval(iv);return bgFinish(false,true)}
+  },1000)}
+
 bdg();
 boot();
 /* وقتی برنامه دوباره باز می‌شود (مثلاً هنگام ارسال استیکر کیبورد، اندروید برنامه را دوباره اجرا می‌کند و استیکر به صفحه نمی‌رسد)، چتی که باز بود دوباره باز می‌شود */
-{const sv2=()=>{try{L.rst=JSON.stringify({c:cur||'',t:Date.now(),k:document.activeElement&&document.activeElement.id=='in'?1:0})}catch{}};
+{const sv2=()=>{if(BGRUN)return;try{L.rst=JSON.stringify({c:cur||'',t:Date.now(),k:document.activeElement&&document.activeElement.id=='in'?1:0})}catch{}};
  document.addEventListener('visibilitychange',()=>{document.visibilityState=='hidden'&&sv2()});
  addEventListener('pagehide',sv2);
  let r=null;try{r=JSON.parse(L.rst||'null')}catch{}
